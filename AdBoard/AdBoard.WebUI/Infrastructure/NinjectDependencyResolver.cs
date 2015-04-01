@@ -1,4 +1,7 @@
-﻿using Ninject;
+﻿using AdBoard.Domain.Abstract;
+using AdBoard.Domain.Entities;
+using Moq;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +32,13 @@ namespace AdBoard.WebUI.Infrastructure
 
         public void AddBindings()
         {
-
+            Mock<IAdRepository> moq = new Mock<IAdRepository>();
+            moq.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Title = "Motocycle", Price = 1000 },
+                    new Ad { Title = "Telephone", Price = 100 }
+                });
+            kernel.Bind<IAdRepository>().ToConstant(moq.Object);
         }
     }
 }
