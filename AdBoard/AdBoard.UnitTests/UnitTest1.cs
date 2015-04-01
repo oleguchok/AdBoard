@@ -6,6 +6,9 @@ using AdBoard.Domain.Entities;
 using System.Collections.Generic;
 using AdBoard.WebUI.Controllers;
 using System.Linq;
+using System.Web.Mvc;
+using AdBoard.WebUI.Models;
+using AdBoard.WebUI.HtmlHelpers;
 
 namespace AdBoard.UnitTests
 {
@@ -36,6 +39,30 @@ namespace AdBoard.UnitTests
             Assert.IsTrue(ads.Count == 2);
             Assert.AreEqual(ads[0].Title, "A4");
             Assert.AreEqual(ads[1].Title, "A5");
+        }
+
+        [TestMethod]
+        public void Can_Generate_Page_Links()
+        {
+            //arrange
+            HtmlHelper helper = null;
+
+            PagingInfo pagingInfo = new PagingInfo
+            {
+                CurrentPage = 2,
+                ItemsPerPage = 10,
+                TotalItems = 28
+            };
+
+            Func<int, string> pageUrlDelegate = i => "Page" + i;
+
+            //act
+            MvcHtmlString result = helper.PageLinks(pagingInfo, pageUrlDelegate);
+
+            //asset
+            Assert.AreEqual(result.ToString() ,@"<a class=""btn btn-default"" href=""Page1"">1</a>"
+                + @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>"
+                + @"<a class=""btn btn-default"" href=""Page3"">3</a>");
         }
     }
 }
