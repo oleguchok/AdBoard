@@ -1,15 +1,16 @@
-﻿@using AdBoard.Domain.Entities
-@model AdBoard.WebUI.Models.AdListViewModel
+﻿@using AdBoard.WebUI.Models
+@using AdBoard.WebUI.HtmlHelpers
+@model AdListViewModel
 
 @{
     ViewBag.Title = "Ads";
 }
 
-@foreach (var p in @Model)
+@foreach (var p in @Model.Ads)
 {
-    <div>
-        <h3>@p.Title</h3>
-        <p>@p.Description</p>
-        <h4>@p.Price.ToString("# rub")</h4>
-    </div>
+    @Html.Partial("AdSummary", p);
 }
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x}))
+</div>

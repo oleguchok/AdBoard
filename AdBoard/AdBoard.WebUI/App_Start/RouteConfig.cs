@@ -14,6 +14,12 @@ namespace AdBoard.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: null,
+                url: "Page{page}",
+                defaults: new { controller = "Ad", action = "List" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Ad", action = "List", id = UrlParameter.Optional }
