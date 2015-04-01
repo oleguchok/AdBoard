@@ -32,10 +32,10 @@ namespace AdBoard.UnitTests
             controller.pageSize = 3;
 
             //act
-            IEnumerable<Ad> result = (IEnumerable<Ad>)controller.List(2).Model;
+            AdListViewModel result = (AdListViewModel)controller.List(2).Model;
 
             //assert
-            List<Ad> ads = result.ToList();
+            List<Ad> ads = result.Ads.ToList();
             Assert.IsTrue(ads.Count == 2);
             Assert.AreEqual(ads[0].Title, "A4");
             Assert.AreEqual(ads[1].Title, "A5");
@@ -63,6 +63,33 @@ namespace AdBoard.UnitTests
             Assert.AreEqual(result.ToString() ,@"<a class=""btn btn-default"" href=""Page1"">1</a>"
                 + @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>"
                 + @"<a class=""btn btn-default"" href=""Page3"">3</a>");
+        }
+
+        [TestMethod]
+        public void Can_Send_Pagination_View_Model()
+        {
+            //arrange
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+            {
+                new Ad { Id = 1, Title = "A1"},
+                new Ad { Id = 2, Title = "A2"},
+                new Ad { Id = 3, Title = "A3"},
+                new Ad { Id = 4, Title = "A4"},
+                new Ad { Id = 5, Title = "A5"}
+            });
+            AdController controller = new AdController(mock.Object);
+            controller.pageSize = 3;
+
+            //act
+            AdListViewModel result = (AdListViewModel)controller.List(2).Model;
+
+            //assert
+            PagingInfo pagingInfo = result.PagingInfo;
+            Assert.AreEqual(pagingInfo.CurrentPage, 2);
+            Assert.AreEqual(pagingInfo.TotalItems, 5);
+            Assert.AreEqual(pagingInfo.TotalPages, 2);
+            Assert.AreEqual(pagingInfo.ItemsPerPage, 3);
         }
     }
 }

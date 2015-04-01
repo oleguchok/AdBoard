@@ -1,4 +1,5 @@
 ﻿using AdBoard.Domain.Abstract;
+using AdBoard.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,20 @@ namespace AdBoard.WebUI.Controllers
 
         public ViewResult List(int page = 1)
         {
-            return View(repository.Ads
-                .OrderBy(ad => ad.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize));
+            AdListViewModel model = new AdListViewModel
+            {
+                Ads = repository.Ads
+                    .OrderBy(ads => ads.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = repository.Ads.Count()
+                }
+            };
+            return View(model);
         }
     }
 }
