@@ -46,15 +46,17 @@ namespace AdBoard.WebUI
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1636839839860813",
+               appSecret: "74abcaffe1cede5606bade7524a2cf64");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1051820490822-b8mo77iknruoecm45kftnncr0l2s2qp1.apps.googleusercontent.com",
+                ClientSecret = "dW-HN0Vi-vJFOTmv1pEMiQXQ"
+            });
+
+            app.UseVkontakteAuthentication(appId: "4856605", appSecret: "mEtzKiP8KSNKi6hNigJV", scope: "email");
         }
     }
 }
