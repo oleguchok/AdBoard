@@ -32,7 +32,7 @@ namespace AdBoard.UnitTests
             controller.pageSize = 3;
 
             //act
-            AdListViewModel result = (AdListViewModel)controller.List(2).Model;
+            AdListViewModel result = (AdListViewModel)controller.List(null,2).Model;
 
             //assert
             List<Ad> ads = result.Ads.ToList();
@@ -82,7 +82,7 @@ namespace AdBoard.UnitTests
             controller.pageSize = 3;
 
             //act
-            AdListViewModel result = (AdListViewModel)controller.List(2).Model;
+            AdListViewModel result = (AdListViewModel)controller.List(null,2).Model;
 
             //assert
             PagingInfo pagingInfo = result.PagingInfo;
@@ -90,6 +90,31 @@ namespace AdBoard.UnitTests
             Assert.AreEqual(pagingInfo.TotalItems, 5);
             Assert.AreEqual(pagingInfo.TotalPages, 2);
             Assert.AreEqual(pagingInfo.ItemsPerPage, 3);
+        }
+
+        [TestMethod]
+        public void Can_Filter_Ads()
+        {
+            //arrange
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+            {
+                new Ad { Id = 1, Title = "Ad1", Category = "C1"},
+                new Ad { Id = 2, Title = "Ad2", Category = "C2"},
+                new Ad { Id = 3, Title = "Ad3", Category = "C1"},
+                new Ad { Id = 4, Title = "Ad4", Category = "C2"},
+                new Ad { Id = 5, Title = "Ad5", Category = "C1"}
+            });
+            AdController controller = new AdController(mock.Object);
+            controller.pageSize = 3;
+
+            //act
+            List<Ad> result = ((AdListViewModel)controller.List("C2", 1).Model).Ads.ToList();
+
+            //assert
+            Assert.AreEqual(result.Count, 2);
+            Assert.IsTrue(result[0].Title == "Ad2" && result[0].Category == "C2");
+            Assert.IsTrue(result[1].Title == "Ad4" && result[1].Category == "C2");
         }
     }
 }

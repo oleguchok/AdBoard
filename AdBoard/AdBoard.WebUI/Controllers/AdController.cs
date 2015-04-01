@@ -11,18 +11,19 @@ namespace AdBoard.WebUI.Controllers
     public class AdController : Controller
     {
         private IAdRepository repository;
-        public int pageSize = 4;
+        public int pageSize = 2;
         
         public AdController(IAdRepository repo)
         {
             repository = repo;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string category, int page = 1)
         {
             AdListViewModel model = new AdListViewModel
             {
                 Ads = repository.Ads
+                    .Where(p => p.Category == null || p.Category == category)
                     .OrderBy(ads => ads.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),
@@ -31,7 +32,8 @@ namespace AdBoard.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     TotalItems = repository.Ads.Count()
-                }
+                },
+                CurrentCategory = category
             };
             return View(model);
         }
