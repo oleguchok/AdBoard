@@ -57,6 +57,27 @@ namespace AdBoard.WebUI.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Date Of Birthday")]
+        public string DateOfBirstday { get; set; }
+
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Display(Name="Street Address")]
+        public string StreetAddress { get; set; }
+
+        [Display(Name = "MobilePhone")]
+        public string MobilePhone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
