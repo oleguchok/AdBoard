@@ -23,7 +23,7 @@ namespace AdBoard.WebUI.Controllers
             AdListViewModel model = new AdListViewModel
             {
                 Ads = repository.Ads
-                    .Where(p => p.Category == null || p.Category == category)
+                    .Where(p => category == null || p.Category == category)
                     .OrderBy(ads => ads.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),

@@ -116,5 +116,51 @@ namespace AdBoard.UnitTests
             Assert.IsTrue(result[0].Title == "Ad2" && result[0].Category == "C2");
             Assert.IsTrue(result[1].Title == "Ad4" && result[1].Category == "C2");
         }
+
+        [TestMethod]
+        public void Can_Generate_List_of_Categories()
+        {
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Id = 1, Category = "C1"},
+                    new Ad { Id = 2, Category = "C3"},
+                    new Ad { Id = 3, Category = "C1"},
+                    new Ad { Id = 4, Category = "C2"},
+                    new Ad { Id = 5, Category = "C3"},
+                });
+            NavController controller = new NavController(mock.Object);
+
+            //act
+            List<string> result = ((IEnumerable<string>)controller.Menu(null).Model).ToList();
+
+            //assert
+            Assert.IsTrue(result.Count == 3);
+            Assert.AreEqual(result[0], "C1");
+            Assert.AreEqual(result[1], "C2");
+            Assert.AreEqual(result[2], "C3");
+        }
+
+        [TestMethod]
+        public void Indicates_Selected_Category()
+        {
+            //arrange 
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+            {
+                new Ad { Id = 1, Category = "C1"},
+                new Ad { Id = 2, Category = "C2"},
+                new Ad { Id = 3, Category = "C1"}
+            });
+            NavController controller = new NavController(mock.Object);
+
+            string categoryToSelect = "C1";
+
+            //act
+            string result = controller.Menu(categoryToSelect).ViewBag.SelectedCategory;
+
+            //assert
+            Assert.AreEqual(categoryToSelect, result);
+        }
     }
 }

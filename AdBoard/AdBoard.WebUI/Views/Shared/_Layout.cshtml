@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
@@ -32,7 +32,7 @@
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">
-            Categories here
+            @Html.Action("Menu","Nav")
         </div>
         <div class="col-xs-7">
             @RenderBody()
