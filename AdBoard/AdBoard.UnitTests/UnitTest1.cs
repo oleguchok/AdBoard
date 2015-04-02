@@ -162,5 +162,34 @@ namespace AdBoard.UnitTests
             //assert
             Assert.AreEqual(categoryToSelect, result);
         }
+
+        [TestMethod]
+        public void Generate_Category_Specific_Count()
+        {
+            //arrange 
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+            {
+                new Ad { Id = 1, Category = "C1"},
+                new Ad { Id = 2, Category = "C2"},
+                new Ad { Id = 3, Category = "C1"},
+                new Ad { Id = 4, Category = "C2"},
+                new Ad { Id = 5, Category = "C3"}
+            });
+            AdController controller = new AdController(mock.Object);
+            controller.pageSize = 3;
+
+            //act
+            int res1 = ((AdListViewModel)controller.List("C1").Model).PagingInfo.TotalItems;
+            int res2 = ((AdListViewModel)controller.List("C2").Model).PagingInfo.TotalItems;
+            int res3 = ((AdListViewModel)controller.List("C3").Model).PagingInfo.TotalItems;
+            int res4 = ((AdListViewModel)controller.List(null).Model).PagingInfo.TotalItems;
+
+            //assert
+            Assert.AreEqual(res1, 2);
+            Assert.AreEqual(res2, 2);
+            Assert.AreEqual(res3, 1);
+            Assert.AreEqual(res4, 5);
+        }
     }
 }

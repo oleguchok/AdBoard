@@ -31,7 +31,9 @@ namespace AdBoard.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Ads.Count()
+                    TotalItems = category == null ?
+                    repository.Ads.Count() :
+                    repository.Ads.Where(a => a.Category == category).Count(),
                 },
                 CurrentCategory = category
             };
