@@ -58,24 +58,27 @@ namespace AdBoard.WebUI.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
         
-        [Display(Name = "Name")]
+        [Display(Name = "Name*")]
         public string Name { get; set; }
 
-        [Display(Name = "Surname")]
+        [Display(Name = "Surname*")]
         public string Surname { get; set; }
 
-        [Display(Name = "Gender")]
+        [Display(Name = "Gender*")]
         public string Gender { get; set; }
 
-        [Display(Name = "Date Of Birthday")]
+        [Display(Name = "Date Of Birthday*")]
         public string DateOfBirstday { get; set; }
 
+        [Required]
         [Display(Name = "Country")]
         public string Country { get; set; }
 
+        [Required]
         [Display(Name="Street Address")]
         public string StreetAddress { get; set; }
 
+        [Required]
         [Display(Name = "MobilePhone")]
         public string MobilePhone { get; set; }
 
