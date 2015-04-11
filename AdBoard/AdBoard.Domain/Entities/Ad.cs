@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace AdBoard.Domain.Entities
 {
     public class Ad
@@ -13,7 +14,7 @@ namespace AdBoard.Domain.Entities
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string Category { get; set; }
+        public int UserId { get; set; }
         public decimal Price { get; set; }
-        //public Profile Contact {get;set;}
     }
 }

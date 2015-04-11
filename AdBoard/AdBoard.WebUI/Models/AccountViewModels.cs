@@ -55,37 +55,37 @@ namespace AdBoard.WebUI.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email*")]
         public string Email { get; set; }
         
-        [Display(Name = "Name*")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Surname*")]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
-        [Display(Name = "Gender*")]
+        [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        [Display(Name = "Date Of Birthday*")]
+        [Display(Name = "Date Of Birthday")]
         public string DateOfBirstday { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country*")]
         public string Country { get; set; }
 
         [Required]
-        [Display(Name="Street Address")]
+        [Display(Name="Street Address*")]
         public string StreetAddress { get; set; }
 
         [Required]
-        [Display(Name = "MobilePhone")]
+        [Display(Name = "MobilePhone*")]
         public string MobilePhone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password*")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
