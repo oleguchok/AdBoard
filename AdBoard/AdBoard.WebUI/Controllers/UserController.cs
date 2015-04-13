@@ -14,19 +14,35 @@ namespace AdBoard.WebUI.Controllers
     public class UserController : Controller
     {
         private IAdRepository repository;
+        public int pageSize = 2;
 
         public UserController(IAdRepository repo)
         {
             repository = repo;
         }
 
-        public ActionResult UserAccount()
+        public ActionResult UserAccount(int page = 1)
         {
-            var user = User.Identity.GetUserId();
-            
-            Ad[] ads = repository.Ads.Where(a => a.UserId == user).Select(p => p).ToArray();
+            var userId = User.Identity.GetUserId();
 
-            return View(ads);
+            UserAdsViewModel model = new UserAdsViewModel
+            {
+                Ads = repository.Ads
+                    .Where(a => a.UserId == userId)
+                    .OrderBy(a => a.Date)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToArray(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = repository.Ads
+                        .Where(a => a.UserId == userId)
+                        .Count()
+                }
+            };
+            return View(model);
         }
     }
 }

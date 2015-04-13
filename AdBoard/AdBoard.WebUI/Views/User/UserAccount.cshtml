@@ -1,0 +1,14 @@
+﻿@model AdBoard.WebUI.Models.UserAdsViewModel
+
+@{
+    ViewBag.Title = "Your Ads";
+}
+
+@foreach (var p in @Model.Ads)
+{
+    @Html.Partial("AdSummary", p);
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("UserAccount", new { page = x}))
+</div>

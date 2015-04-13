@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AdBoard.WebUI.Models;
 using AdBoard.WebUI.HtmlHelpers;
+using Microsoft.AspNet.Identity;
 
 namespace AdBoard.UnitTests
 {

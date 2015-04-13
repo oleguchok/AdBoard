@@ -35,7 +35,7 @@ namespace AdBoard.WebUI.Infrastructure
             Mock<IAdRepository> moq = new Mock<IAdRepository>();
             moq.Setup(m => m.Ads).Returns(new List<Ad>
                 {
-                    new Ad { Title = "Motocycle", Price = 1000, Category = "Auto-Moto", UserId = "292f0580-aa53-49b3-9d7c-2a1c05a4fb37" },
+                    new Ad { Title = "Motocycle", Price = 1000, Category = "Auto-Moto", UserId = "292f0580-aa53-49b3-9d7c-2a1c05a4fb37", Date = DateTime.Now },
                     new Ad { Title = "Telephone", Price = 100, Category = "Phone" },
                     new Ad { Title = "Toyota", Price = 1234, Category = "Auto-Moto"}
                 });
