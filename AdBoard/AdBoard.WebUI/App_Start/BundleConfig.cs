@@ -31,6 +31,9 @@ namespace AdBoard.WebUI
                         "~/Scripts/jquery.mask.min.js",
                         "~/Scripts/maskedinput-binder.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jasny-bootstrap").Include(
+                "~/Scripts/jasny-bootstrap.min.js"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

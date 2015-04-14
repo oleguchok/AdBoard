@@ -86,13 +86,14 @@ namespace AdBoard.WebUI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Name = model.Name,
                     Surname = model.Surname, Gender = model.Gender, DateOfBirthday = model.DateOfBirstday,
-                    Country = model.Country, StreetAddress = model.StreetAddress, MobilePhone = model.MobilePhone};
+                    Country = model.Country, StreetAddress = model.StreetAddress, MobilePhone = model.MobilePhone,
+                    ImageData = model.ImageData, ImageMimeType = model.ImageMimeType};
 
                 if (user.Name == null)
                     user.Name = string.Empty;
@@ -108,6 +109,13 @@ namespace AdBoard.WebUI.Controllers
                     user.StreetAddress = string.Empty;
                 if (user.MobilePhone == null)
                     user.MobilePhone = string.Empty;
+
+                if (image != null)
+                {
+                    user.ImageMimeType = image.ContentType;
+                    user.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(user.ImageData, 0, image.ContentLength);
+                }
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

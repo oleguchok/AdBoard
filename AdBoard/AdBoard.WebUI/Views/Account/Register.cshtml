@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype="multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Gender)
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.RadioButtonFor(m => m.Gender, "male")
             <span>male</span>
@@ -76,8 +76,21 @@
             @Html.TextBoxFor(model => model.MobilePhone, new { mask = "375 (99) 999-99-99", @class = "form-control" })
         </div>
    </div>
-    
-    
+   <div class="form-group">
+       <div style="position:relative;">
+           <label class="col-md-2 control-label">Image</label>
+           <a class="btn btn-file" href="javascript:;">
+               Choose Image...
+               <input type="file" name="Image" size="40"
+                      style="position:absolute;z-index:2;top:0;
+                                left:0;filter: alpha(opacity=0); opacity:0;
+                                background-color:transparent;color:transparent;"
+                      onchange='$("#upload-file-info").html($(this).val());'>
+           </a>
+           <span class="label label-info" id="upload-file-info"></span>
+       </div>
+   </div> 
+
     <label>Fields marked without asterisk(*) are optional</label>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -89,4 +102,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquerymask")
+    @Scripts.Render("~/bundles/jasny-bootstrap")
 }

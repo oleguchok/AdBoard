@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201504021736488_MigrationDb.Designer.cs">
       <DependentUpon>201504021736488_MigrationDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504142102477_AddImage.cs" />
+    <Compile Include="Migrations\201504142102477_AddImage.Designer.cs">
+      <DependentUpon>201504142102477_AddImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdListViewModel.cs" />
@@ -228,6 +232,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -297,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504021736488_MigrationDb.resx">
       <DependentUpon>201504021736488_MigrationDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142102477_AddImage.resx">
+      <DependentUpon>201504142102477_AddImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
