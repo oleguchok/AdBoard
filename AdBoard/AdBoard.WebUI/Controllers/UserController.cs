@@ -44,5 +44,13 @@ namespace AdBoard.WebUI.Controllers
             };
             return View(model);
         }
+
+        public PartialViewResult ProfileBar(string id)
+        {
+            var users = new ApplicationDbContext();
+            ApplicationUser user = users.Users.Where(u => u.Id == id).First();
+            
+            return PartialView();
+        }
     }
 }

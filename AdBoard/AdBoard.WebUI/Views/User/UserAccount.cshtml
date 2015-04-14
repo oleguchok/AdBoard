@@ -4,6 +4,13 @@
     ViewBag.Title = "Your Ads";
 }
 
+<div class="profile_info">
+    <section class="adview_contact">
+      
+    </section>
+
+</div>
+
 @foreach (var p in @Model.Ads)
 {
     @Html.Partial("AdSummary", p);
