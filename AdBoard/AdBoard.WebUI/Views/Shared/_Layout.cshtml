@@ -31,6 +31,11 @@
             </div>
         </div>
     </div>
+
+    <div class="visible-xs">
+        @Html.Action("Menu", "Nav", new { horizontalNav = true })
+    </div>
+
     <div class="row panel" style="width: 100%">
         <div id="categories" class="col-sm-3 hidden-xs">
             @Html.Action("Menu","Nav")

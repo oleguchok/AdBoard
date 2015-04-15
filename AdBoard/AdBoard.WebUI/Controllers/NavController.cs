@@ -24,7 +24,8 @@ namespace AdBoard.WebUI.Controllers
                 .Select(a => a.Category)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+
+            return PartialView("FlexMenu", categories);
         }
     }
 }

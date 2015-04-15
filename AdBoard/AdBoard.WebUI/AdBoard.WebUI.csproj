@@ -280,8 +280,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Ad\List.cshtml" />
     <Content Include="Views\Shared\AdSummary.cshtml" />
-    <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\User\UserAccount.cshtml" />
+    <Content Include="Views\Nav\FlexMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
