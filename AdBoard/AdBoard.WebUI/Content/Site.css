@@ -19,3 +19,9 @@ textarea {
 #categories {
     padding: 2%;
 }
+
+#navbar-image {
+    margin: 1%;
+    height: 30px;
+    width: 30px;
+}

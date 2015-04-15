@@ -581,5 +581,31 @@ namespace AdBoard.WebUI.Controllers
             }
         }
         #endregion
+
+        public FileContentResult GetImage()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            if (currentUser != null)
+            {
+                if (currentUser.ImageData != null)
+                    return File(currentUser.ImageData, currentUser.ImageMimeType);
+                else
+                {
+                    string path = AppDomain.CurrentDomain.BaseDirectory + "/Content/Images/User.png";
+                    return File(GetImageFromLocalPath(path), "image/jpg");
+                }            
+            }
+            else
+            {
+
+                return null; ;
+            }
+        }
+
+        private byte[] GetImageFromLocalPath(string path)
+        {
+            return System.IO.File.ReadAllBytes(path);
+        }
     }
 }

@@ -49,7 +49,6 @@ namespace AdBoard.WebUI.Controllers
         {
             var users = new ApplicationDbContext();
             ApplicationUser user = users.Users.Where(u => u.Id == id).First();
-            
             return PartialView();
         }
     }
