@@ -282,6 +282,7 @@
     <Content Include="Views\Shared\AdSummary.cshtml" />
     <Content Include="Views\User\UserAccount.cshtml" />
     <Content Include="Views\Nav\FlexMenu.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

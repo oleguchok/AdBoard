@@ -25,3 +25,21 @@ textarea {
     height: 30px;
     width: 30px;
 }
+
+#user-ads{
+
+}
+
+#profile-bar{
+    padding: 1%;
+}
+
+#profile-text {
+    word-wrap:break-word;
+}
+
+#profile-avatar{
+    height:100px;
+    width: 96px;
+    padding:4%;
+}

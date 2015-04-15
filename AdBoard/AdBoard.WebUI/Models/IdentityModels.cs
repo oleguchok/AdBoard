@@ -48,5 +48,7 @@ namespace AdBoard.WebUI.Models
         {
             return new ApplicationDbContext();
         }
+
+       // public System.Data.Entity.DbSet<AdBoard.WebUI.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

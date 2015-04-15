@@ -10,5 +10,6 @@ namespace AdBoard.WebUI.Models
     {
         public IEnumerable<Ad> Ads { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
