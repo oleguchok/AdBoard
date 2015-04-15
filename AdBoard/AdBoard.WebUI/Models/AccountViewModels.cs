@@ -58,17 +58,13 @@ namespace AdBoard.WebUI.Models
         [Display(Name = "Email*")]
         public string Email { get; set; }
         
-        [Display(Name = "Name")]
+        [Required]
+        [Display(Name = "Name*")]
         public string Name { get; set; }
-
-        [Display(Name = "Surname")]
+        
+        [Required]
+        [Display(Name = "Surname*")]
         public string Surname { get; set; }
-
-        [Display(Name = "Gender")]
-        public string Gender { get; set; }
-
-        [Display(Name = "Date Of Birthday")]
-        public string DateOfBirstday { get; set; }
 
         [Required]
         [Display(Name = "Country*")]
@@ -82,10 +78,13 @@ namespace AdBoard.WebUI.Models
         [Display(Name = "MobilePhone*")]
         public string MobilePhone { get; set; }
 
+        public int[] FavoritesAds { get; set; }
+
         [Display(Name = "Image")]
         public byte[] ImageData { get; set; }
 
         public string ImageMimeType { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -94,7 +93,7 @@ namespace AdBoard.WebUI.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm password*")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

@@ -204,6 +204,14 @@
     <Compile Include="Migrations\201504142102477_AddImage.Designer.cs">
       <DependentUpon>201504142102477_AddImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504152258441_AddFavoritesAds.cs" />
+    <Compile Include="Migrations\201504152258441_AddFavoritesAds.Designer.cs">
+      <DependentUpon>201504152258441_AddFavoritesAds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504152301194_AddFav.cs" />
+    <Compile Include="Migrations\201504152301194_AddFav.Designer.cs">
+      <DependentUpon>201504152301194_AddFav.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdListViewModel.cs" />
@@ -307,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504142102477_AddImage.resx">
       <DependentUpon>201504142102477_AddImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504152258441_AddFavoritesAds.resx">
+      <DependentUpon>201504152258441_AddFavoritesAds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504152301194_AddFav.resx">
+      <DependentUpon>201504152301194_AddFav.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

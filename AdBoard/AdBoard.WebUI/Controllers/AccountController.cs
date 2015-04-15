@@ -91,24 +91,9 @@ namespace AdBoard.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Name = model.Name,
-                    Surname = model.Surname, Gender = model.Gender, DateOfBirthday = model.DateOfBirstday,
-                    Country = model.Country, StreetAddress = model.StreetAddress, MobilePhone = model.MobilePhone,
-                    ImageData = model.ImageData, ImageMimeType = model.ImageMimeType};
-
-                if (user.Name == null)
-                    user.Name = string.Empty;
-                if (user.Surname == null)
-                    user.Surname = string.Empty;
-                if (user.Gender == null)
-                    user.Gender = string.Empty;
-                if (user.DateOfBirthday == null)
-                    user.DateOfBirthday = string.Empty;
-                if (user.Country == null)
-                    user.Country = string.Empty;
-                if (user.StreetAddress == null)
-                    user.StreetAddress = string.Empty;
-                if (user.MobilePhone == null)
-                    user.MobilePhone = string.Empty;
+                    Surname = model.Surname, Country = model.Country, StreetAddress = model.StreetAddress, 
+                    MobilePhone = model.MobilePhone, ImageData = model.ImageData, ImageMimeType = model.ImageMimeType,
+                    FavoritesAds = model.FavoritesAds};
 
                 if (image != null)
                 {

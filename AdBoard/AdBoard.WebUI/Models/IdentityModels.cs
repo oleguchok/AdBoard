@@ -9,6 +9,7 @@ namespace AdBoard.WebUI.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public int[] FavoritesAds { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
 
@@ -19,8 +20,6 @@ namespace AdBoard.WebUI.Models
             // Add custom user claims here
             userIdentity.AddClaim(new Claim(ClaimTypes.Name, this.Name));
             userIdentity.AddClaim(new Claim(ClaimTypes.Surname, this.Surname));
-            userIdentity.AddClaim(new Claim(ClaimTypes.Gender, this.Gender));
-            userIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, this.DateOfBirthday));
             userIdentity.AddClaim(new Claim(ClaimTypes.Country, this.Country));
             userIdentity.AddClaim(new Claim(ClaimTypes.StreetAddress, this.StreetAddress));
             userIdentity.AddClaim(new Claim(ClaimTypes.MobilePhone, this.MobilePhone));
@@ -29,8 +28,6 @@ namespace AdBoard.WebUI.Models
 
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Gender { get; set; }
-        public string DateOfBirthday { get; set; }
         public string Country { get; set; }
         public string StreetAddress { get; set; }
         public string MobilePhone { get; set; }
