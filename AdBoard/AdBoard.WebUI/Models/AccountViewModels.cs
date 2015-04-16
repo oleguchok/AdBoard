@@ -19,6 +19,31 @@ namespace AdBoard.WebUI.Models
     public class ManageUserViewModel
     {
         [Required]
+        [EmailAddress]
+        [Display(Name="Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Required]
+        [Display(Name = "Street Address")]
+        public string StreetAddress { get; set; }
+
+        [Required]
+        [Display(Name = "MobilePhone")]
+        public string MobilePhone { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }

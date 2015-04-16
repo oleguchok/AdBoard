@@ -1,0 +1,93 @@
+﻿@model AdBoard.WebUI.Models.ManageUserViewModel
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<h1>Edit Profile</h1>
+<hr>
+@using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="row">
+        <div class="col-md-5 col-lg-4">
+            <div class="text-center">
+                <img src="@Url.Action("GetImage","Account")" class="avatar img-circle" alt="avatar" id="blah" style="height:100px;width:100px;" />
+                <input type="file" name="Image" class="form-control" onchange="readURL(this);" />
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-8 personal-info">
+            <h3>Personal info</h3>
+            @Html.ValidationSummary( "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Surname, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", value = @Model.Surname })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", value = @Model.Email })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control", value = @Model.Country })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StreetAddress, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.StreetAddress, new { @class = "form-control", value = @Model.StreetAddress })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.MobilePhone, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.MobilePhone, new { mask = "375 (99) 999-99-99", @class = "form-control", value = @Model.MobilePhone })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.OldPassword, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control", value = @Model.OldPassword })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", value = @Model.ConfirmPassword })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.NewPassword, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control", value = @Model.NewPassword })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-6 col-md-6">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/imageload")
+    @Scripts.Render("~/bundles/jquerymask")
+    @Scripts.Render("~/bundles/jqueryval")
+}

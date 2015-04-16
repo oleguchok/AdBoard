@@ -331,6 +331,54 @@ namespace AdBoard.WebUI.Controllers
             return View(model);
         }
 
+        public ActionResult EditProfile()
+        {
+            ManageUserViewModel model = new ManageUserViewModel();
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            model.Name = user.Name;
+            model.Surname = user.Surname;
+            model.MobilePhone = user.MobilePhone;
+            model.Email = user.Email;
+            model.Country = user.Country;
+            model.StreetAddress = user.StreetAddress;
+            model.OldPassword = string.Empty;
+            model.NewPassword = string.Empty;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile(ManageUserViewModel model, HttpPostedFileBase image = null)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.MobilePhone = model.MobilePhone;
+                user.Email = model.Email;
+                user.Country = model.Country;
+                user.StreetAddress = model.StreetAddress;
+                if (image != null)
+                {
+                    user.ImageMimeType = image.ContentType;
+                    user.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(user.ImageData, 0, image.ContentLength);
+                }
+
+                var result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    AddErrors(result);
+                }
+            }
+
+            return RedirectToAction("EditProfile");
+        }
+
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
