@@ -290,7 +290,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Ad\List.cshtml" />
     <Content Include="Views\Shared\AdSummary.cshtml" />
-    <Content Include="Views\User\UserAccount.cshtml" />
+    <Content Include="Views\User\UserAds.cshtml" />
     <Content Include="Views\Nav\FlexMenu.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />

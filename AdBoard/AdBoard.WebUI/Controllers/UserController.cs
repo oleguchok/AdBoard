@@ -28,7 +28,7 @@ namespace AdBoard.WebUI.Controllers
             repository = repo;
         }
 
-        public ActionResult UserAccount(int page = 1)
+        public ActionResult UserAds(int page = 1)
         {
             var userId = User.Identity.GetUserId();
 
@@ -36,7 +36,7 @@ namespace AdBoard.WebUI.Controllers
             {
                 Ads = repository.Ads
                     .Where(a => a.UserId == userId)
-                    .OrderBy(a => a.Date)
+                    .OrderBy(a => a.Title)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
                     .ToArray(),

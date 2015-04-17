@@ -30,6 +30,12 @@ namespace AdBoard.WebUI
                 );
 
             routes.MapRoute(
+                null,
+                "UserAds",
+                new { controller = "User", action = "UserAds" }
+                );
+
+            routes.MapRoute(
                 name: null,
                 url: "Page{page}",
                 defaults: new { controller = "Ad", action = "List", category = (string)null },

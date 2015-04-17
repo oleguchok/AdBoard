@@ -1,0 +1,23 @@
+﻿@model AdBoard.WebUI.Models.UserAdsViewModel
+
+@{
+    ViewBag.Title = "Your Ads";
+}
+
+<div class="page-header">
+    <h1>My Ads
+    <button type="button" class="btn btn-primary btn-lg" style="float:right;">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new Ad
+    </button>
+    </h1>
+</div>
+
+<h2>Your ads:</h2>
+@foreach (var p in @Model.Ads)
+{
+    @Html.Partial("AdSummary", p);
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("UserAds", new { page = x}))
+</div>

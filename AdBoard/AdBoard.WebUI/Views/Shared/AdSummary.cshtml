@@ -2,8 +2,9 @@
 
 <div class="well" id="user-ads">
     <h3>
-        <strong>@Model.Title</strong>
-        <span class="pull-right label label-primary">@Model.Price.ToString("# руб")</span>
+            <strong>@Model.Title</strong>
+            <span class="pull-right label label-primary">@Model.Date.ToShortDateString() | @Model.Price.ToString("# руб")</span>
+
     </h3>
     <span class="lead">@Model.Description</span>
 </div>

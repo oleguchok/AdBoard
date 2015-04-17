@@ -34,7 +34,7 @@ textarea {
     padding: 1%;
 }
 
-#profile-text {
+#profile-text, #user-ads {
     word-wrap:break-word;
 }
 
