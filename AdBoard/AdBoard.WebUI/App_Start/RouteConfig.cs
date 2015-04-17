@@ -24,6 +24,12 @@ namespace AdBoard.WebUI
                 });
 
             routes.MapRoute(
+                null,
+                "EditProfile",
+                new { controller = "Account", action = "EditProfile" }
+                );
+
+            routes.MapRoute(
                 name: null,
                 url: "Page{page}",
                 defaults: new { controller = "Ad", action = "List", category = (string)null },
