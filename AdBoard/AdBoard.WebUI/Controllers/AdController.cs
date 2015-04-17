@@ -1,4 +1,5 @@
 ﻿using AdBoard.Domain.Abstract;
+using AdBoard.Domain.Concrete;
 using AdBoard.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,12 @@ namespace AdBoard.WebUI.Controllers
     {
         private IAdRepository repository;
         public int pageSize = 2;
+        private EFDbContext db = new EFDbContext();
+        protected ApplicationDbContext ApplicationDbContext { get; set; }
         
         public AdController(IAdRepository repo)
         {
+            this.ApplicationDbContext = new ApplicationDbContext();
             repository = repo;
         }
 
@@ -22,7 +26,7 @@ namespace AdBoard.WebUI.Controllers
         {
             AdListViewModel model = new AdListViewModel
             {
-                Ads = repository.Ads
+                Ads = db.Ads
                     .Where(p => category == null || p.Category == category)
                     .OrderBy(ads => ads.Id)
                     .Skip((page - 1) * pageSize)
@@ -38,6 +42,23 @@ namespace AdBoard.WebUI.Controllers
                 CurrentCategory = category
             };
             return View(model);
+        }
+
+        public ViewResult AdInfo(int id)
+        {
+            var ad = db.Ads.Where(a => a.Id == id).FirstOrDefault();
+            UserAdViewModel model = new UserAdViewModel
+            {
+                Ad = ad,
+                User = ApplicationDbContext.Users.FirstOrDefault(u => u.Id == ad.UserId)
+            };
+            return View(model);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

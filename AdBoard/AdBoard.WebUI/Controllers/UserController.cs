@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using AdBoard.Domain.Concrete;
 
 namespace AdBoard.WebUI.Controllers
 {
@@ -16,7 +17,7 @@ namespace AdBoard.WebUI.Controllers
     {
         private IAdRepository repository;
         public int pageSize = 2;
-
+        protected EFDbContext db;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
 
         protected UserManager<ApplicationUser> UserManager { get; set; }
@@ -25,6 +26,7 @@ namespace AdBoard.WebUI.Controllers
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
+            db = new EFDbContext();
             repository = repo;
         }
 
@@ -34,7 +36,7 @@ namespace AdBoard.WebUI.Controllers
 
             UserAdsViewModel model = new UserAdsViewModel
             {
-                Ads = repository.Ads
+                Ads = db.Ads
                     .Where(a => a.UserId == userId)
                     .OrderBy(a => a.Title)
                     .Skip((page - 1) * pageSize)
@@ -58,6 +60,12 @@ namespace AdBoard.WebUI.Controllers
             var userId = User.Identity.GetUserId();
             var user = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId);
             return PartialView(user);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
