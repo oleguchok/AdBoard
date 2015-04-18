@@ -3,6 +3,33 @@
 @{
     ViewBag.Title = "AdInfo";
 }
-
-<h2>AdInfo</h2>
-
+<div class="page-header">
+    <h2>
+        @Model.Ad.Title
+        <button type="button" class="btn btn-warning btn-lg" style="float:right;">
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Starred
+        </button>
+    </h2>
+</div>
+<div class="col-md-12">
+    <div class="jumbotron" id="profile-bar">
+        <h3>Author:</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <img src="@Url.Action("GetImage", "Account")" class="img-responsive img-thumbnail" alt="avatar"  />
+            </div>
+            <div class="col-md-7">
+                <p class="text-capitalize" id="profile-text">@Model.User.Name @Model.User.Surname</p>
+                <address style="margin:2%;">
+                    @Model.User.StreetAddress<br>
+                    @Model.User.Country<br>
+                    <abbr title="Phone">P:</abbr> @Model.User.MobilePhone
+                    <a href="mailto:#">@Model.User.Email</a>
+                </address>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    @Html.Partial("AdSummary", @Model.Ad)
+</div>

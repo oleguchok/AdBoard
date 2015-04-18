@@ -41,6 +41,7 @@ namespace AdBoard.WebUI.Controllers
                 },
                 CurrentCategory = category
             };
+            ViewBag.IsInfo = false;
             return View(model);
         }
 
@@ -52,6 +53,7 @@ namespace AdBoard.WebUI.Controllers
                 Ad = ad,
                 User = ApplicationDbContext.Users.FirstOrDefault(u => u.Id == ad.UserId)
             };
+            ViewBag.IsInfo = true;
             return View(model);
         }
 

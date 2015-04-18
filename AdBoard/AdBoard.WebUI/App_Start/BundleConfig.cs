@@ -37,6 +37,9 @@ namespace AdBoard.WebUI
             bundles.Add(new ScriptBundle("~/bundles/imageload").Include(
                 "~/Scripts/imageload.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/sitescripts").Include(
+                "~/Scripts/sitescripts.js"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

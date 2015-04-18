@@ -52,6 +52,7 @@ namespace AdBoard.WebUI.Controllers
                 },
                 User = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId)
             };
+            ViewBag.IsInfo = false;
             return View(model);
         }
 

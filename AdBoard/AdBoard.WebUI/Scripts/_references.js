@@ -10,3 +10,4 @@
 /// <reference path="npm.js" />
 /// <reference path="jasny-bootstrap.min.js" />
 /// <reference path="imageload.js" />
+/// <reference path="sitescripts.js" />

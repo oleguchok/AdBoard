@@ -1,10 +1,18 @@
 ﻿@model AdBoard.Domain.Entities.Ad
-
-<div class="well" id="user-ads">
-    <h3>
+<a href="@Url.Action("AdInfo", "Ad", new { id = @Model.Id })">
+    <div class="well" id="user-ads">
+        <h3>
             <strong>@Model.Title</strong>
             <span class="pull-right label label-primary">@Model.Date.ToShortDateString() | @Model.Price.ToString("# руб")</span>
 
-    </h3>
-    <span class="lead">@Model.Description</span>
-</div>
+        </h3>
+        @if (ViewBag.IsInfo)
+        {
+            <span class="lead">@Model.Description</span>
+        }
+        else
+        {
+            <span class="lead">@Model.Description.Remove(2,Model.Description.Length-2)</span>
+        }
+    </div>
+</a>
