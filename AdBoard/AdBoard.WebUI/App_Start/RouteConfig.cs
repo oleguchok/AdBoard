@@ -25,6 +25,13 @@ namespace AdBoard.WebUI
 
             routes.MapRoute(
                 null,
+                "UserAds{page}",
+                new { controller = "User", action = "UserAds" },
+                constraints: new { page = @"\d+" }
+            );
+
+            routes.MapRoute(
+                null,
                 "UserAds",
                 new { controller = "User", action = "UserAds" }
             );

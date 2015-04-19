@@ -16,7 +16,7 @@ namespace AdBoard.WebUI.Controllers
     public class UserController : Controller
     {
         private IAdRepository repository;
-        public int pageSize = 2;
+        public int pageSize = 1;
         protected EFDbContext db;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
 
@@ -46,7 +46,7 @@ namespace AdBoard.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Ads
+                    TotalItems = db.Ads
                         .Where(a => a.UserId == userId)
                         .Count()
                 },
