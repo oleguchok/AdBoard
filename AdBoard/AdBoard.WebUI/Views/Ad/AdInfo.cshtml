@@ -30,12 +30,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-12">
-    @foreach (AdBoard.Domain.Entities.Image image in @Model.Ad.Images)
-    {
-        <img src="@Url.Action("GetAdImage", "Ad", new { imageId = image.Id })" class="img-responsive img-thumbnail" alt="avatar" />
-    }
-</div>
+
 <div class="col-md-12">
     @Html.Partial("AdSummary", @Model.Ad)
 </div>

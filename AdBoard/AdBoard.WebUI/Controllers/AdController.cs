@@ -23,6 +23,11 @@ namespace AdBoard.WebUI.Controllers
             repository = repo;
         }
 
+        public ViewResult Create()
+        {
+            return View();
+        }
+
         public ViewResult List(string category, int page = 1)
         {
             AdListViewModel model = new AdListViewModel
@@ -31,7 +36,7 @@ namespace AdBoard.WebUI.Controllers
                     .Where(p => category == null || p.Category == category)
                     .OrderBy(ads => ads.Id)
                     .Skip((page - 1) * pageSize)
-                    .Take(pageSize),
+                    .Take(pageSize).ToList(),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -42,7 +47,13 @@ namespace AdBoard.WebUI.Controllers
                 },
                 CurrentCategory = category
             };
+            foreach(Ad ad in model.Ads)
+            {
+                ad.Images = db.Images
+                            .Where(i => i.AdId == ad.Id);       
+            }
             ViewBag.IsInfo = false;
+            ViewBag.IsUserAd = false;
             return View(model);
         }
 
@@ -56,6 +67,10 @@ namespace AdBoard.WebUI.Controllers
                 User = ApplicationDbContext.Users.FirstOrDefault(u => u.Id == ad.UserId)
             };
             ViewBag.IsInfo = true;
+            if (model.Ad.UserId == model.User.Id)
+                ViewBag.IsUserAd = true;
+            else
+                ViewBag.IsUserAd = false;
             return View(model);
         }
 
@@ -75,6 +90,8 @@ namespace AdBoard.WebUI.Controllers
             else
             {
                 return null;
+                /*string path = AppDomain.CurrentDomain.BaseDirectory + "/Content/Images/No_image.png";
+                return File(System.IO.File.ReadAllBytes(path), "image/jpg");*/
             }
         }
     }

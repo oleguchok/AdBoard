@@ -41,7 +41,7 @@ namespace AdBoard.WebUI.Controllers
                     .OrderBy(a => a.Title)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
-                    .ToArray(),
+                    .ToList(),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -52,7 +52,13 @@ namespace AdBoard.WebUI.Controllers
                 },
                 User = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId)
             };
-            ViewBag.IsInfo = false;
+            foreach (Ad ad in model.Ads)
+            {
+                ad.Images = db.Images
+                            .Where(i => i.AdId == ad.Id);
+            }
+            ViewBag.IsInfo = true;
+            ViewBag.IsUserAd = true;
             return View(model);
         }
 

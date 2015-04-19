@@ -1,18 +1,52 @@
 ﻿@model AdBoard.Domain.Entities.Ad
-<a href="@Url.Action("AdInfo", "Ad", new { id = @Model.Id })">
-    <div class="well" id="user-ads">
-        <h3>
-            <strong>@Model.Title</strong>
-            <span class="pull-right label label-primary">@Model.Date.ToShortDateString() | @Model.Price.ToString("# руб")</span>
 
-        </h3>
-        @if (ViewBag.IsInfo)
+<div class="well" id="user-ads">
+    <h3>
+        <a href="@Url.Action("AdInfo", "Ad", new { id = @Model.Id })">
+            <strong>@Model.Title</strong>
+        </a>
+        <span class="pull-right label label-primary">@Model.Date.ToShortDateString() | @Model.Price.ToString("# руб")</span>
+
+    </h3>
+
+    @if (ViewBag.IsInfo)
+    {
+        if (Model.Images.FirstOrDefault() != null)
         {
-            <span class="lead">@Model.Description</span>
+            <div class="col-md-12">
+                @foreach (AdBoard.Domain.Entities.Image image in @Model.Images)
+                {
+                    <img src="@Url.Action("GetAdImage", "Ad", new { imageId = image.Id })" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+                }
+            </div>
         }
         else
         {
-            <span class="lead">@Model.Description.Remove(2,Model.Description.Length-2)</span>
+            <div class="col-md-12">
+                <img src="~/Content/Images/No_image.png" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image" />
+            </div>
         }
-    </div>
-</a>
+        <span class="lead" id="profile-text">@Model.Description</span>
+    }
+    else
+    {
+        if (Model.Images.FirstOrDefault() != null)
+        {
+            <div class="col-md-12">
+                <img src="@Url.Action("GetAdImage","Ad", new { imageId = Model.Images.Single() })" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+            </div>
+        }
+        else
+        {
+            <img src="~/Content/Images/No_image.png" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+        }
+        <span class="lead">@Model.Description.Remove(2, Model.Description.Length - 2)</span>
+    }
+    @if (ViewBag.IsUserAd)
+    {
+        <a href="#" class="btn btn-sm btn-block btn-default" role="button"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+        <a href="#" class="btn btn-sm btn-block btn-danger" role="button"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+    }
+
+</div>
+
