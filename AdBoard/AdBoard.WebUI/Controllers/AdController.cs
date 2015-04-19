@@ -1,5 +1,6 @@
 ﻿using AdBoard.Domain.Abstract;
 using AdBoard.Domain.Concrete;
+using AdBoard.Domain.Entities;
 using AdBoard.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,7 @@ namespace AdBoard.WebUI.Controllers
         public ViewResult AdInfo(int id)
         {
             var ad = db.Ads.Where(a => a.Id == id).FirstOrDefault();
+            ad.Images = db.Images.Where(m => m.AdId == id);
             UserAdViewModel model = new UserAdViewModel
             {
                 Ad = ad,
@@ -61,6 +63,19 @@ namespace AdBoard.WebUI.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public FileContentResult GetAdImage(int imageId)
+        {
+            var Image = db.Images.Where(i => i.Id == imageId).FirstOrDefault();
+            if (Image != null)
+            {
+                return File(Image.ImageData, Image.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -16,5 +16,6 @@ namespace AdBoard.Domain.Entities
         public string Category { get; set; }
         public string UserId { get; set; }
         public decimal Price { get; set; }
+        public IEnumerable<Image> Images { get; set; }
     }
 }

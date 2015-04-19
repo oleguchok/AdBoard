@@ -15,5 +15,10 @@ namespace AdBoard.Domain.Concrete
         {
             get { return context.Ads; }
         }
+
+        public IEnumerable<Entities.Image> Images
+        {
+            get { return context.Images; }
+        }
     }
 }

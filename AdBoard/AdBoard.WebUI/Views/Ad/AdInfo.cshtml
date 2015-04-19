@@ -16,7 +16,7 @@
         <h3>Author:</h3>
         <div class="row">
             <div class="col-md-5">
-                <img src="@Url.Action("GetImage", "Account")" class="img-responsive img-thumbnail" alt="avatar"  />
+                <img src="@Url.Action("GetImage", "Image", new { id = @Model.User.Id })" class="img-responsive img-thumbnail" alt="avatar" />
             </div>
             <div class="col-md-7">
                 <p class="text-capitalize" id="profile-text">@Model.User.Name @Model.User.Surname</p>
@@ -29,6 +29,12 @@
             </div>
         </div>
     </div>
+</div>
+<div class="col-md-12">
+    @foreach (AdBoard.Domain.Entities.Image image in @Model.Ad.Images)
+    {
+        <img src="@Url.Action("GetAdImage", "Ad", new { imageId = image.Id })" class="img-responsive img-thumbnail" alt="avatar" />
+    }
 </div>
 <div class="col-md-12">
     @Html.Partial("AdSummary", @Model.Ad)

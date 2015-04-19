@@ -8,8 +8,8 @@
     <ul class="nav navbar-nav navbar-right">
         <li>
             <a href="@Url.Action("UserAds","User")" style="height:50px;">
-                <img id="navbar-image" class="img-circle" src="@Url.Action("GetImage",
-                "Account")" title="Manage" />
+                <img id="navbar-image" class="img-circle" src="@Url.Action("GetImage", "Image",
+                new { id = @User.Identity.GetUserId() })" title="User" />
             </a>
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

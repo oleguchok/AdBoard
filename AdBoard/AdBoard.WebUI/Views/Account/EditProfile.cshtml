@@ -1,4 +1,5 @@
-﻿@model AdBoard.WebUI.Models.ManageUserViewModel
+﻿@using Microsoft.AspNet.Identity
+@model AdBoard.WebUI.Models.ManageUserViewModel
 @{
     ViewBag.Title = "EditProfile";
 }
@@ -12,7 +13,7 @@
     <div class="row">
         <div class="col-md-5 col-lg-4">
             <div class="text-center">
-                <img src="@Url.Action("GetImage","Account")" class="avatar img-thumbnail img-responsive" alt="avatar" id="blah" />
+                <img src="@Url.Action("GetImage", "Image", new { id = @User.Identity.GetUserId() })" class="avatar img-thumbnail img-responsive" alt="avatar" id="blah" />
                 <input type="file" name="Image" class="form-control" onchange="readURL(this, '#blah');" />
             </div>
         </div>

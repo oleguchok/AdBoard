@@ -25,15 +25,17 @@ namespace AdBoard.WebUI
 
             routes.MapRoute(
                 null,
-                "EditProfile",
-                new { controller = "Account", action = "EditProfile" }
+                "UserAds",
+                new { controller = "User", action = "UserAds" }
             );
 
             routes.MapRoute(
                 null,
-                "UserAds",
-                new { controller = "User", action = "UserAds" }
+                "EditProfile",
+                new { controller = "Account", action = "EditProfile" }
             );
+
+            
 
             routes.MapRoute(
                 name: null,

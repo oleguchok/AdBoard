@@ -4,7 +4,7 @@
 <div class="jumbotron" id="profile-bar">
     <div class="row">
         <div class="col-md-5">
-            <img src="@Url.Action("GetImage", "Account")" class="img-thumbnail img-responsive" alt="avatar" id="profile-avatar" />
+            <img src="@Url.Action("GetImage", "Image", new { id = @Model.Id })" class="img-thumbnail img-responsive" alt="avatar" id="profile-avatar" />
         </div>
         <div class="col-md-7">
             <p class="text-capitalize" id="profile-text">@Model.Name @Model.Surname</p>

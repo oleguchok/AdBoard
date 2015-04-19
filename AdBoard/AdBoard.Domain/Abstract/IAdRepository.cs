@@ -10,5 +10,6 @@ namespace AdBoard.Domain.Abstract
     public interface IAdRepository
     {
         IEnumerable<Ad> Ads { get; }
+        IEnumerable<Image> Images { get; }
     }
 }

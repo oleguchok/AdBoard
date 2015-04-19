@@ -11,5 +11,6 @@ namespace AdBoard.Domain.Concrete
     public class EFDbContext : DbContext
     {
         public DbSet<Ad> Ads { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Concrete\EFAdRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Entities\Ad.cs" />
+    <Compile Include="Entities\Image.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
