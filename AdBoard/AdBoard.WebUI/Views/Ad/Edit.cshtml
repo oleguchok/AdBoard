@@ -1,0 +1,60 @@
+﻿@model AdBoard.Domain.Entities.Ad
+
+@{
+    ViewBag.Title = "Edit";
+    HtmlHelper.ClientValidationEnabled = false;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Editing Ad @Model.Name</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.UserId)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if ((property.PropertyName != "Id") && (property.PropertyName != "UserId"))
+                {
+                    <div class="form-group">
+                        <label>@(property.PropertyName)</label>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null,
+                                new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            if (property.PropertyName == "Date")
+                            {
+                                @Html.TextBox(property.PropertyName, null,
+                                    new { mask = "99.99.99 99:99:99", @class = "form-control" })
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null,
+                                    new { @class = "form-control" })
+                            }
+                        }
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
+                }
+            }
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+            @Html.ActionLink("Cancel changes and return to list", "AdInfo", "Ad", new { id = @Model.Id }, new
+            {
+                @class = "btn btn-default"
+            })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquerymask")
+}

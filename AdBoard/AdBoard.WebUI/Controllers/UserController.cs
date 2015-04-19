@@ -38,7 +38,7 @@ namespace AdBoard.WebUI.Controllers
             {
                 Ads = db.Ads
                     .Where(a => a.UserId == userId)
-                    .OrderBy(a => a.Title)
+                    .OrderBy(a => a.Name)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
                     .ToList(),

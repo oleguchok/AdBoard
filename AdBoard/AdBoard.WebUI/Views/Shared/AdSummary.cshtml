@@ -3,7 +3,7 @@
 <div class="well" id="user-ads">
     <h3>
         <a href="@Url.Action("AdInfo", "Ad", new { id = @Model.Id })">
-            <strong>@Model.Title</strong>
+            <strong>@Model.Name</strong>
         </a>
         <span class="pull-right label label-primary">@Model.Date.ToShortDateString() | @Model.Price.ToString("# руб")</span>
 
@@ -44,7 +44,7 @@
     }
     @if (ViewBag.IsUserAd)
     {
-        <a href="#" class="btn btn-sm btn-block btn-default" role="button"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+        <a href="@Url.Action("Edit","Ad", new { id = @Model.Id })" class="btn btn-sm btn-block btn-default" role="button"><span class="glyphicon glyphicon-edit"></span> Edit</a>
         <a href="#" class="btn btn-sm btn-block btn-danger" role="button"><span class="glyphicon glyphicon-remove"></span> Delete</a>
     }
 

@@ -1,4 +1,5 @@
 ﻿using AdBoard.Domain.Abstract;
+using AdBoard.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdBoard.Domain.Concrete
 {
-    class EFAdRepository : IAdRepository
+    public class EFAdRepository : IAdRepository
     {
         EFDbContext context = new EFDbContext();
 
@@ -19,6 +20,25 @@ namespace AdBoard.Domain.Concrete
         public IEnumerable<Entities.Image> Images
         {
             get { return context.Images; }
+        }
+
+        public void SaveAd(Ad ad)
+        {
+            if (ad.Id == 0)
+                context.Ads.Add(ad);
+            else
+            {
+                Ad dbEntry = context.Ads.Find(ad.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = ad.Name;
+                    dbEntry.Description = ad.Description;
+                    dbEntry.Price = ad.Price;
+                    dbEntry.Category = ad.Category;
+                    dbEntry.Date = ad.Date;
+                }
+            }
+            context.SaveChanges();
         }
     }
 }

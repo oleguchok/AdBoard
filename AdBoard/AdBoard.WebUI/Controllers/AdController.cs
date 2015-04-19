@@ -12,12 +12,12 @@ namespace AdBoard.WebUI.Controllers
 {
     public class AdController : Controller
     {
-        private IAdRepository repository;
+        private EFAdRepository repository;
         public int pageSize = 2;
         private EFDbContext db = new EFDbContext();
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         
-        public AdController(IAdRepository repo)
+        public AdController(EFAdRepository repo)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             repository = repo;
@@ -26,6 +26,29 @@ namespace AdBoard.WebUI.Controllers
         public ViewResult Create()
         {
             return View();
+        }
+
+        public ViewResult Edit(int id)
+        {
+            Ad ad = db.Ads
+                    .FirstOrDefault(a => a.Id == id);
+            return View(ad);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Ad ad)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveAd(ad);
+                TempData["message"] = string.Format("Changing in ad \"{0}\" was saved", ad.Name);
+                return RedirectToAction("UserAds","User");
+            }
+            else
+            {
+                // Что-то не так со значениями данных
+                return View(ad);
+            }
         }
 
         public ViewResult List(string category, int page = 1)

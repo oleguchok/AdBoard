@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using AdBoard.WebUI.Models;
 using AdBoard.WebUI.HtmlHelpers;
 using Microsoft.AspNet.Identity;
+using AdBoard.Domain.Concrete;
 
 namespace AdBoard.UnitTests
 {
@@ -20,14 +21,14 @@ namespace AdBoard.UnitTests
         public void CanPaginate()
         {
             //arrange
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
                 {
-                    new Ad { Id = 1, Title = "A1"},
-                    new Ad { Id = 2, Title = "A2"},
-                    new Ad { Id = 3, Title = "A3"},
-                    new Ad { Id = 4, Title = "A4"},
-                    new Ad { Id = 5, Title = "A5"}
+                    new Ad { Id = 1, Name = "A1"},
+                    new Ad { Id = 2, Name = "A2"},
+                    new Ad { Id = 3, Name = "A3"},
+                    new Ad { Id = 4, Name = "A4"},
+                    new Ad { Id = 5, Name = "A5"}
                 });
             AdController controller = new AdController(mock.Object);
             controller.pageSize = 3;
@@ -38,8 +39,8 @@ namespace AdBoard.UnitTests
             //assert
             List<Ad> ads = result.Ads.ToList();
             Assert.IsTrue(ads.Count == 2);
-            Assert.AreEqual(ads[0].Title, "A4");
-            Assert.AreEqual(ads[1].Title, "A5");
+            Assert.AreEqual(ads[0].Name, "A4");
+            Assert.AreEqual(ads[1].Name, "A5");
         }
 
         [TestMethod]
@@ -70,14 +71,14 @@ namespace AdBoard.UnitTests
         public void Can_Send_Pagination_View_Model()
         {
             //arrange
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
-                new Ad { Id = 1, Title = "A1"},
-                new Ad { Id = 2, Title = "A2"},
-                new Ad { Id = 3, Title = "A3"},
-                new Ad { Id = 4, Title = "A4"},
-                new Ad { Id = 5, Title = "A5"}
+                new Ad { Id = 1, Name = "A1"},
+                    new Ad { Id = 2, Name = "A2"},
+                    new Ad { Id = 3, Name = "A3"},
+                    new Ad { Id = 4, Name = "A4"},
+                    new Ad { Id = 5, Name = "A5"}
             });
             AdController controller = new AdController(mock.Object);
             controller.pageSize = 3;
@@ -97,14 +98,14 @@ namespace AdBoard.UnitTests
         public void Can_Filter_Ads()
         {
             //arrange
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
-                new Ad { Id = 1, Title = "Ad1", Category = "C1"},
-                new Ad { Id = 2, Title = "Ad2", Category = "C2"},
-                new Ad { Id = 3, Title = "Ad3", Category = "C1"},
-                new Ad { Id = 4, Title = "Ad4", Category = "C2"},
-                new Ad { Id = 5, Title = "Ad5", Category = "C1"}
+                new Ad { Id = 1, Name = "Ad1", Category = "C1"},
+                new Ad { Id = 2, Name = "Ad2", Category = "C2"},
+                new Ad { Id = 3, Name = "Ad3", Category = "C1"},
+                new Ad { Id = 4, Name = "Ad4", Category = "C2"},
+                new Ad { Id = 5, Name = "Ad5", Category = "C1"}
             });
             AdController controller = new AdController(mock.Object);
             controller.pageSize = 3;
@@ -114,8 +115,8 @@ namespace AdBoard.UnitTests
 
             //assert
             Assert.AreEqual(result.Count, 2);
-            Assert.IsTrue(result[0].Title == "Ad2" && result[0].Category == "C2");
-            Assert.IsTrue(result[1].Title == "Ad4" && result[1].Category == "C2");
+            Assert.IsTrue(result[0].Name == "Ad2" && result[0].Category == "C2");
+            Assert.IsTrue(result[1].Name == "Ad4" && result[1].Category == "C2");
         }
 
         [TestMethod]
@@ -168,7 +169,7 @@ namespace AdBoard.UnitTests
         public void Generate_Category_Specific_Count()
         {
             //arrange 
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Category = "C1"},
@@ -191,6 +192,29 @@ namespace AdBoard.UnitTests
             Assert.AreEqual(res2, 2);
             Assert.AreEqual(res3, 1);
             Assert.AreEqual(res4, 5);
+        }
+
+        [TestMethod]
+        public void Can_Edit_Ad()
+        {
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Id = 1, Name = "A1"},
+                    new Ad { Id = 2, Name = "A2"},
+                    new Ad { Id = 3, Name ="A3"},
+                });
+
+            AdController controller = new AdController(mock.Object);
+
+            Ad ad1 = controller.Edit(1).ViewData.Model as Ad;
+            Ad ad2 = controller.Edit(2).ViewData.Model as Ad;
+            Ad ad3 = controller.Edit(3).ViewData.Model as Ad;
+
+            Assert.AreEqual(1, ad1.Id);
+            Assert.AreEqual(2, ad2.Id);
+            Assert.AreEqual(3, ad3.Id);
+
         }
     }
 }
