@@ -1,0 +1,143 @@
+\documentclass[14pt,a4paper]{extreport}
+\usepackage[top=2cm, left=3cm, bottom=2cm, right=1cm]{geometry}
+\usepackage[utf8x]{inputenc} % Включаем поддержку UTF8
+\usepackage[russian]{babel} % Пакет поддержки русского языка
+\usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage{textcase}
+
+
+\title{}
+\author{}
+
+\begin{document}
+%----------ТИТУЛЬНЫЙ-ЛИСТ--------------
+	\center
+	Министерство образования Республики Беларусь\\
+	Учреждение образования «Белорусский государственный университет информатики и радиоэлектроники»
+	\vspace*{2cm}
+	\endcenter
+	\raggedright
+	Факультет компьютерных систем и сетей\\
+	\medskip
+	Кафедра программного обеспечения информационных технологий\\
+	\medskip
+	Дисциплина:  Компьютерные системы и сети (КСиС)
+	\vspace*{2cm}
+	\center
+	ПОЯСНИТЕЛЬНАЯ ЗАПИСКА\\
+	к курсовому проекту\\
+	на тему\\
+	\medskip
+	Веб-сайт доска объявлений\\
+	\medskip
+	БГУИР КП  1-40 01 0 26 ПЗ
+	\vspace*{4cm}
+	\endcenter
+	\raggedright
+	\hspace*{7.94cm}Студент:  гр. 351002 Гучок О.А.\\
+	\bigskip
+	\hspace*{7.94cm}Руководитель: асс. Третьяков Ф.И.\\
+	\center
+	\vspace*{2cm}
+	Минск 2015
+	\pagestyle{empty}
+%-------ЛИСТ-ЗАДАНИЯ--------------
+	\newpage
+	\center
+	Учреждение образования\\
+	\medskip
+	«Белорусский государственный университет информатики и радиоэлектроники»\\
+	\medskip
+	Факультет компьютерных систем и сетей\\
+	\medskip
+	\endcenter
+	\raggedright
+	\hspace*{9.53cm}УТВЕРЖДАЮ\\
+	\hspace*{9.53cm}Заведующий кафедрой ПОИТ\\
+	\hspace*{9.53cm}\underline{\hspace{6cm}} \\
+	\hspace*{11cm}\small (подпись) \normalsize\\
+	\hspace*{9.53cm}\underline{\hspace{5cm}}2015 г.\\
+	\medskip
+	\center
+	ЗАДАНИЕ\\
+	по курсовому проектированию\\
+	\medskip
+	\endcenter
+	\raggedright
+	Студенту \underline{Гучку Олегу Анатольевичу}\\
+	\begin{enumerate}
+	\item Тема работы \underline{Веб-сайт доска объявлений}\\ 
+	\item Срок сдачи студентом законченной работы \underline{DD.MM.YYYY}
+	\item Исходные данные к работе \underline{Среда разработки Visual Studio 2013. }
+	\item Содержание расчётно-пояснительной записки (перечень вопросов, которые подлежат разработке)\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}Введение. 1. Анализ литературных источников. 2. Постановка задачи\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}3.Разработка программного средства. 4. Руководство по \\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}использованию веб-сайта. Заключение. Приложения.
+	\item Перечень графического материала (с точным обозначением обязательных чертежей и графиков)\\
+	\underline{1. Схема алгоритма}
+	\item Консультант по курсовой работе\\
+	\underline{Третьяков Ф.И.}  
+	\item Дата выдачи задания \underline{DD.MM.YYYY}
+	\item Календарный график работы над проектом на весь период проектирования (с обозначением сроков выполнения и процентом от общего объёма работы):\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}раздел 1 к DD.MM.YYYY – 15 \% готовности работы;\\  
+	\underline{\hspace*{16cm}}\hspace*{-16cm}разделы 2, 3 к DD.MM.YYYY – 30 \% готовности работы;\\ 
+	\underline{\hspace*{16cm}}\hspace*{-16cm}раздел 4 к DD.MM.YYYY – 60 \% готовности работы;\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}раздел 5, 6 к DD.MM.YYYY  –  90 \% готовности работы;\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}оформление пояснительной записки и графического материала к\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}DD.MM.YYYY – 100 \% готовности работы.\\
+	\underline{\hspace*{16cm}}\hspace*{-16cm}Защита курсового проекта с DD по DD декабря YYYY г.\\
+	\end{enumerate}
+	\hspace*{7cm}РУКОВОДИТЕЛЬ\underline{\hspace*{6cm}}\hspace*{-3.9cm}Третьяков Ф.И.\\
+	\hspace*{11.5cm}\small (подпись) \normalsize\\
+	\bigskip
+	Задание принял к исполнению \underline{\hspace*{10.5cm}}\hspace*{-8cm}Гучок О.А. DD.MM.YYYYг.\\
+	\hspace*{7cm}\small (дата и подпись студента) \normalsize\\
+	%-------СОДЕРЖАНИЕ--------------
+	\newpage
+	\pagestyle{plain}
+	%\renewcommand{\headrulewidth}{0px}
+	%\fancypagestyle{plain}{\cfoot{}\rfoot{\thepage}}
+	
+	\renewcommand\contentsname{\center\normalsize \textbf{СОДЕРЖАНИЕ} \endcenter}
+	\tableofcontents
+	\endcenter
+	%-----ВВЕДЕНИЕ-----
+	\newpage
+	\addcontentsline{toc}{section}{ВВЕДЕНИЕ}
+	\section*{\center\normalsize ВВЕДЕНИЕ \endcenter}
+	\hspace{4ex} ВВЕДЕНИЕ
+
+	%-----АНАЛИЗ ЛИТЕРАТУРНЫХ ИСТОЧНИКОВ----
+	\newpage
+	\addcontentsline{toc}{section}{1 АНАЛИЗ ЛИТЕРАТУРНЫХ ИСТОЧНИКОВ}
+	\section*{\normalsize\hspace{4ex}1 АНАЛИЗ ЛИТЕРАТУРНЫХ ИСТОЧНИКОВ}
+	\hspace{4ex} АНАЛИЗ
+	%-----РАЗРАБОТКА ИГРОВОГО ПРИЛОЖЕНИЯ----
+	\newpage
+	\addcontentsline{toc}{section}{2 РАЗРАБОТКА ПРИЛОЖЕНИЯ}
+	\section*{\normalsize\hspace{4ex}2 РАЗРАБОТКА ПРИЛОЖЕНИЯ}
+	%-----РУКОВОДСТВО ПО УСТАНОВКЕ И ИСПОЛЬЗОВАНИЮ ИГРОВОГО ПРИЛОЖЕНИЯ------
+	\newpage
+	\addcontentsline{toc}{section}{3 РУКОВОДСТВО ПО УСТАНОВКЕ И ИСПОЛЬЗОВАНИЮ ВЕБ-САЙТА}
+	\section*{\normalsize\hspace{4ex}3 РУКОВОДСТВО ПО УСТАНОВКЕ И ИСПОЛЬЗОВАНИЮ ВЕБ-САЙТА}
+	\hspace{4ex}ИСПОЛЬЗОВАНИЕ
+	%-------ЗАКЛЮЧЕНИЕ-------
+	\newpage
+	\addcontentsline{toc}{section}{ЗАКЛЮЧЕНИЕ}
+	\section*{\center\normalsize ЗАКЛЮЧЕНИЕ \endcenter}
+	\hspace{4ex}Что получилось в результате выполнения курсовой работы, что планируется добавить в будущем.
+	%----СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ-------
+	\newpage
+	\addcontentsline{toc}{section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}
+	\section*{\center\normalsize СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ \endcenter}
+	%----ПРИЛОЖЕНИЕ А (обязательное) Исходный код программы----
+	\begin{landscape}
+	\newpage
+	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ А}
+	\section*{\center\normalsize ПРИЛОЖЕНИЕ А\\(обязательное)\\Исходный код программы \endcenter}
+	<html>HTML-код</html>
+	\end{landscape}
+	
+	
+\end{document}          
