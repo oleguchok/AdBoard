@@ -44,9 +44,20 @@ namespace AdBoard.WebUI.Controllers
             }
             else
             {
-                // Что-то не так со значениями данных
                 return View(ad);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int adId)
+        {
+            Ad deletedAd = repository.DeleteAd(adId);
+            if (deletedAd != null)
+            {
+                TempData["message"] = string.Format("Ad \"{0}\" was deleted",
+                    deletedAd.Name);
+            }
+            return RedirectToAction("UserAds","User");
         }
 
         public ViewResult Create()

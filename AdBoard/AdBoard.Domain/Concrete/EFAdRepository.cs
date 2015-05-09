@@ -40,5 +40,16 @@ namespace AdBoard.Domain.Concrete
             }
             context.SaveChanges();
         }
+        
+        public Ad DeleteAd(int adId)
+        {
+            Ad dbEntry = context.Ads.Find(adId);
+            if (dbEntry != null)
+            {
+                context.Ads.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

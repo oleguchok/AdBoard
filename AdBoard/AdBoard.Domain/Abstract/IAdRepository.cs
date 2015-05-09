@@ -12,5 +12,6 @@ namespace AdBoard.Domain.Abstract
         IEnumerable<Ad> Ads { get; }
         IEnumerable<Image> Images { get; }
         void SaveAd(Ad ad);
+        Ad DeleteAd(int adId);
     }
 }

@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 @foreach (AdBoard.Domain.Entities.Image image in @Model.Images)
                 {
-                    <img src="@Url.Action("GetAdImage", "Ad", new { imageId = image.Id })" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+                    <img src="@Url.Action("GetAdImage", "Ad", new { imageId = image.Id })" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image" />
                 }
             </div>
         }
@@ -33,20 +33,28 @@
         if (Model.Images.FirstOrDefault() != null)
         {
             <div class="col-md-12">
-                <img src="@Url.Action("GetAdImage","Ad", new { imageId = Model.Images.First().Id })" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+                <img src="@Url.Action("GetAdImage","Ad", new { imageId = Model.Images.First().Id })"
+                     class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image" />
             </div>
         }
         else
         {
-            <img src="~/Content/Images/No_image.png" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image"/>
+            <img src="~/Content/Images/No_image.png" class="img-responsive img-thumbnail" alt="AdImage" id="ad-main-image" />
         }
         <span class="lead">@Model.Description.Remove(2, Model.Description.Length - 2)</span>
     }
     @if (ViewBag.IsUserAd)
     {
-        <a href="@Url.Action("Edit","Ad", new { id = @Model.Id })" class="btn btn-sm btn-block btn-default" role="button"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-        <a href="@Url.Action("EditImages","Ad", new { adId = @Model.Id })" class="btn btn-sm btn-block btn-default" role="button"><span class="glyphicon glyphicon-picture"></span> Edit Photos</a>
-        <a href="#" class="btn btn-sm btn-block btn-danger" role="button"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+        <a href="@Url.Action("Edit","Ad", new { id = @Model.Id })" class="btn btn-sm btn-block btn-default"
+           role="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+        <a href="@Url.Action("EditImages","Ad", new { adId = @Model.Id })" class="btn btn-sm btn-block btn-default"
+           role="button"><span class="glyphicon glyphicon-picture"></span>Edit Photos</a>
+        using (Html.BeginForm("Delete", "Ad",new { adId = @Model.Id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-sm btn-block btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </button>
+        }     
     }
 
 </div>
