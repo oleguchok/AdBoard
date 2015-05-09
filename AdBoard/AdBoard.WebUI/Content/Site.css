@@ -38,7 +38,7 @@ textarea {
     word-wrap:break-word;
 }
 
-#profile-avatar{
+#profile-avatar, #ad-images{
     height:110px;
 
 }

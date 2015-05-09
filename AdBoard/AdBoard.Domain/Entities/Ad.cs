@@ -32,6 +32,8 @@ namespace AdBoard.Domain.Entities
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Please, enter ad price")]
         public decimal Price { get; set; }
+
+        [HiddenInput(DisplayValue=false)]
         public IEnumerable<Image> Images { get; set; }
     }
 }

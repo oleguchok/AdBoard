@@ -191,6 +191,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\ImageHelper.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Migrations\201503312237307_InitialCreate.cs" />
@@ -300,6 +301,7 @@
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Ad\AdInfo.cshtml" />
     <Content Include="Views\Ad\Edit.cshtml" />
+    <Content Include="Views\Ad\EditImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

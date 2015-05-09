@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Image>
+@using AdBoard.Domain.Entities
+@{
+    ViewBag.Title = "EditImages";
+}
+
+<h2>Edit Your Images</h2>
+<div class="row">
+    @foreach(Image image in Model)
+    {
+        <div class="col-md-8">
+            @Html.Image(@Url.Action("GetAdImage", "Ad", new { imageId = image.Id }), "text", new { @class = "img-responsible", id = "ad-images" })
+        </div>
+    }
+</div>
+@using (Html.BeginForm("EditImages", "Ad", new { adId = ViewBag.AdId }, FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-5 col-lg-4">
+        <div class="text-center">
+            <img src="#" class="avatar img-thumbnail img-responsive" alt="avatar" id="blah" />
+            <input type="file" name="file" class="form-control" onchange="readURL(this, '#blah');" />
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-default" value="Edit" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/imageload")
+}

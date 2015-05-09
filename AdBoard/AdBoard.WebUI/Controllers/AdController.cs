@@ -4,9 +4,12 @@ using AdBoard.Domain.Entities;
 using AdBoard.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+
 
 namespace AdBoard.WebUI.Controllers
 {
@@ -21,11 +24,6 @@ namespace AdBoard.WebUI.Controllers
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             repository = repo;
-        }
-
-        public ViewResult Create()
-        {
-            return View();
         }
 
         public ViewResult Edit(int id)
@@ -49,6 +47,13 @@ namespace AdBoard.WebUI.Controllers
                 // Что-то не так со значениями данных
                 return View(ad);
             }
+        }
+
+        public ViewResult Create()
+        {
+            Ad ad = new Ad();
+            ad.UserId = User.Identity.GetUserId();
+            return View("Edit", ad);
         }
 
         public ViewResult List(string category, int page = 1)
@@ -116,6 +121,40 @@ namespace AdBoard.WebUI.Controllers
                 /*string path = AppDomain.CurrentDomain.BaseDirectory + "/Content/Images/No_image.png";
                 return File(System.IO.File.ReadAllBytes(path), "image/jpg");*/
             }
+        }
+
+        public ActionResult EditImages(int adId)
+        {
+            var images = repository.Images.Where(i => i.AdId == adId);
+            ViewBag.AdId = adId;
+            return View(images);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditImages(int adId, HttpPostedFileBase file = null)
+        {
+            Image image = new Image();
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    int count = db.Images.Count();
+                    image.Id = ++count;
+                    image.AdId = adId;
+                    image.ImageMimeType = file.ContentType;
+                    image.ImageData = new byte[file.ContentLength];
+                    file.InputStream.Read(image.ImageData, 0, file.ContentLength);
+                    db.Images.Add(image);
+                    db.SaveChanges();
+                }
+               
+            }
+            else
+            {
+                return null;                
+            }
+            return RedirectToAction("AdInfo", new { id = image.AdId });
         }
     }
 }

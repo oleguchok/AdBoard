@@ -11,14 +11,15 @@
         <h3>Editing Ad @Model.Name</h3>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit","Ad"))
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
             @Html.HiddenFor(m => m.UserId)
             @foreach (var property in ViewData.ModelMetadata.Properties)
             {
-                if ((property.PropertyName != "Id") && (property.PropertyName != "UserId"))
+                if ((property.PropertyName != "Id") && (property.PropertyName != "UserId")
+                    && (property.PropertyName != "Images"))
                 {
                     <div class="form-group">
                         <label>@(property.PropertyName)</label>
