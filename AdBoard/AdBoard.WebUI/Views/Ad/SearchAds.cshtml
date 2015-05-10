@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AdBoard.Domain.Entities.Ad>
+
+@{
+    ViewBag.Title = "SearchAds";
+}
+
+<h2>SearchAds</h2>
+<div>
+<p>
+    @using (Html.BeginForm("SearchAds","Ad",FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.Label("Title", new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBox("adName", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Category", String.Empty);
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-sm" value="Search" />
+            </div>
+        </div>        
+    }
+</p>
+</div>
+@foreach (var item in Model) {
+    @Html.Partial("AdSummary", item);
+}

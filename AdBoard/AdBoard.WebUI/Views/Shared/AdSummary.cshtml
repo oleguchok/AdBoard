@@ -30,7 +30,7 @@
     }
     else
     {
-        if (Model.Images.FirstOrDefault() != null)
+        if (Model.Images != null && Model.Images.FirstOrDefault() != null)
         {
             <div class="col-md-12">
                 <img src="@Url.Action("GetAdImage","Ad", new { imageId = Model.Images.First().Id })"

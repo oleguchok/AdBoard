@@ -12,7 +12,7 @@ namespace AdBoard.Domain.Concrete
     {
         EFDbContext context = new EFDbContext();
 
-        public IEnumerable<Entities.Ad> Ads
+        public virtual IEnumerable<Entities.Ad> Ads
         {
             get { return context.Ads; }
         }

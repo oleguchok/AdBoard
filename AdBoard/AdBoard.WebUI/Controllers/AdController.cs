@@ -17,7 +17,7 @@ namespace AdBoard.WebUI.Controllers
     {
         private EFAdRepository repository;
         public int pageSize = 2;
-        private EFDbContext db = new EFDbContext();
+        EFDbContext db = new EFDbContext();
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         
         public AdController(EFAdRepository repo)
@@ -28,7 +28,7 @@ namespace AdBoard.WebUI.Controllers
 
         public ViewResult Edit(int id)
         {
-            Ad ad = db.Ads
+            Ad ad = repository.Ads
                     .FirstOrDefault(a => a.Id == id);
             return View(ad);
         }
@@ -71,7 +71,7 @@ namespace AdBoard.WebUI.Controllers
         {
             AdListViewModel model = new AdListViewModel
             {
-                Ads = db.Ads
+                Ads = repository.Ads
                     .Where(p => category == null || p.Category == category)
                     .OrderBy(ads => ads.Id)
                     .Skip((page - 1) * pageSize)
@@ -81,14 +81,14 @@ namespace AdBoard.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     TotalItems = category == null ?
-                    db.Ads.Count() :
-                    db.Ads.Where(a => a.Category == category).Count(),
+                    repository.Ads.Count() :
+                    repository.Ads.Where(a => a.Category == category).Count(),
                 },
                 CurrentCategory = category
             };
             foreach(Ad ad in model.Ads)
             {
-                ad.Images = db.Images
+                ad.Images = repository.Images
                             .Where(i => i.AdId == ad.Id);       
             }
             ViewBag.IsInfo = false;
@@ -98,8 +98,8 @@ namespace AdBoard.WebUI.Controllers
 
         public ViewResult AdInfo(int id)
         {
-            var ad = db.Ads.Where(a => a.Id == id).FirstOrDefault();
-            ad.Images = db.Images.Where(m => m.AdId == id);
+            var ad = repository.Ads.Where(a => a.Id == id).FirstOrDefault();
+            ad.Images = repository.Images.Where(m => m.AdId == id);
             UserAdViewModel model = new UserAdViewModel
             {
                 Ad = ad,
@@ -119,9 +119,50 @@ namespace AdBoard.WebUI.Controllers
             base.Dispose(disposing);
         }
 
+        [HttpPost]
+        public void StarAd(int adId)
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId);
+            if (user.FavoritesAds != null && user.FavoritesAds.Contains(adId))
+            {
+                user.FavoritesAds = user.FavoritesAds.Where(a => a != adId).ToArray();
+            }
+            else
+            {
+                if (user.FavoritesAds != null)
+                {
+                    user.FavoritesAds.ToList().Add(adId);
+                    user.FavoritesAds.ToArray();
+                }
+                else
+                    user.FavoritesAds = new int[1] { adId };
+            }
+            ApplicationDbContext.SaveChanges();
+        }
+
+        public ActionResult SearchAds(string adName, string category)
+        {
+            ViewBag.Category = new SelectList(repository.Ads, "Category", "Category");
+            ViewBag.IsInfo = false;
+            ViewBag.IsUserAd = false;
+            var ads = from a in repository.Ads
+                      select a;
+            if (!String.IsNullOrEmpty(adName))
+            {
+                ads = ads.Where(a => a.Name.Contains(adName));
+            }
+            if (!String.IsNullOrEmpty(category))
+            {
+                return View(ads.Where(x => x.Category == category));
+            }
+            else
+                return View(ads);
+        }
+
         public FileContentResult GetAdImage(int imageId)
         {
-            var Image = db.Images.Where(i => i.Id == imageId).FirstOrDefault();
+            var Image = repository.Images.Where(i => i.Id == imageId).FirstOrDefault();
             if (Image != null)
             {
                 return File(Image.ImageData, Image.ImageMimeType);
@@ -150,7 +191,7 @@ namespace AdBoard.WebUI.Controllers
             {
                 if (file != null)
                 {
-                    int count = db.Images.Count();
+                    int count = repository.Images.Count();
                     image.Id = ++count;
                     image.AdId = adId;
                     image.ImageMimeType = file.ContentType;

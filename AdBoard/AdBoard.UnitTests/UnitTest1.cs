@@ -122,7 +122,7 @@ namespace AdBoard.UnitTests
         [TestMethod]
         public void Can_Generate_List_of_Categories()
         {
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
                 {
                     new Ad { Id = 1, Category = "C1"},
@@ -147,7 +147,7 @@ namespace AdBoard.UnitTests
         public void Indicates_Selected_Category()
         {
             //arrange 
-            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Category = "C1"},
