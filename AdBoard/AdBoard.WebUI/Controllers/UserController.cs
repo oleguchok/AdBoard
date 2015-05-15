@@ -15,18 +15,13 @@ namespace AdBoard.WebUI.Controllers
 {
     public class UserController : Controller
     {
-        private IAdRepository repository;
+        IAdRepository repository;
         public int pageSize = 1;
-        protected EFDbContext db;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
-
-        protected UserManager<ApplicationUser> UserManager { get; set; }
 
         public UserController(IAdRepository repo)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
-            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
-            db = new EFDbContext();
             repository = repo;
         }
 
@@ -36,7 +31,7 @@ namespace AdBoard.WebUI.Controllers
 
             UserAdsViewModel model = new UserAdsViewModel
             {
-                Ads = db.Ads
+                Ads = repository.Ads
                     .Where(a => a.UserId == userId)
                     .OrderBy(a => a.Name)
                     .Skip((page - 1) * pageSize)
@@ -46,7 +41,7 @@ namespace AdBoard.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = db.Ads
+                    TotalItems = repository.Ads
                         .Where(a => a.UserId == userId)
                         .Count()
                 },
@@ -54,7 +49,7 @@ namespace AdBoard.WebUI.Controllers
             };
             foreach (Ad ad in model.Ads)
             {
-                ad.Images = db.Images
+                ad.Images = repository.Images
                             .Where(i => i.AdId == ad.Id);
             }
             ViewBag.IsInfo = true;
@@ -67,12 +62,6 @@ namespace AdBoard.WebUI.Controllers
             var userId = User.Identity.GetUserId();
             var user = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId);
             return PartialView(user);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
