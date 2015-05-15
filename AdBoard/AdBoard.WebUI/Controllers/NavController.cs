@@ -11,9 +11,8 @@ namespace AdBoard.WebUI.Controllers
     public class NavController : Controller
     {
         private IAdRepository repository;
-        private EFAdRepository db = new EFAdRepository();
 
-        public NavController(EFAdRepository repo)
+        public NavController(IAdRepository repo)
         {
             repository = repo;
         }
@@ -29,11 +28,5 @@ namespace AdBoard.WebUI.Controllers
 
             return PartialView("FlexMenu", categories);
         }
-
-        /*protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }*/
     }
 }
