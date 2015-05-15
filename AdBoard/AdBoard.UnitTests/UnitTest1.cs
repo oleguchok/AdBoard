@@ -21,7 +21,7 @@ namespace AdBoard.UnitTests
         public void CanPaginate()
         {
             //arrange
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
                 {
                     new Ad { Id = 1, Name = "A1"},
@@ -71,7 +71,7 @@ namespace AdBoard.UnitTests
         public void Can_Send_Pagination_View_Model()
         {
             //arrange
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Name = "A1"},
@@ -98,7 +98,7 @@ namespace AdBoard.UnitTests
         public void Can_Filter_Ads()
         {
             //arrange
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Name = "Ad1", Category = "C1"},
@@ -122,7 +122,7 @@ namespace AdBoard.UnitTests
         [TestMethod]
         public void Can_Generate_List_of_Categories()
         {
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
                 {
                     new Ad { Id = 1, Category = "C1"},
@@ -147,7 +147,7 @@ namespace AdBoard.UnitTests
         public void Indicates_Selected_Category()
         {
             //arrange 
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Category = "C1"},
@@ -169,7 +169,7 @@ namespace AdBoard.UnitTests
         public void Generate_Category_Specific_Count()
         {
             //arrange 
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
             {
                 new Ad { Id = 1, Category = "C1"},
@@ -197,7 +197,7 @@ namespace AdBoard.UnitTests
         [TestMethod]
         public void Can_Edit_Ad()
         {
-            Mock<EFAdRepository> mock = new Mock<EFAdRepository>();
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
             mock.Setup(m => m.Ads).Returns(new List<Ad>
                 {
                     new Ad { Id = 1, Name = "A1"},
