@@ -11,6 +11,11 @@ using AdBoard.WebUI.Models;
 using AdBoard.WebUI.HtmlHelpers;
 using Microsoft.AspNet.Identity;
 using AdBoard.Domain.Concrete;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
+using System.Web.Routing;
+using System.Security.Claims;
 
 namespace AdBoard.UnitTests
 {
@@ -215,6 +220,32 @@ namespace AdBoard.UnitTests
             Assert.AreEqual(2, ad2.Id);
             Assert.AreEqual(3, ad3.Id);
 
+        }
+
+        [TestMethod]
+        public void Can_Create_Ad()
+        {
+            var context = new Mock<HttpContextBase>();
+            var mockIdentity = new Mock<IIdentity>();
+            context.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
+            mockIdentity.Setup(x => x.Name).Returns("test_name");
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Id = 0, Name="A1", UserId = "id"}
+                });
+
+            var identity = new GenericIdentity("dominik.ernst@xyz123.de");
+            identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", "id"));
+            var principal = new GenericPrincipal(identity, new[] { "user" });
+            context.Setup(s => s.User).Returns(principal);
+
+            AdController controller = new AdController(mock.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            var result = controller.Create().Model as Ad;
+            
+            Assert.AreEqual(result.UserId, "id");
         }
     }
 }
