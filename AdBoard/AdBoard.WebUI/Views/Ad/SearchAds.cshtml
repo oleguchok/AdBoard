@@ -12,7 +12,7 @@
         <div class="form-group">
             @Html.Label("Title", new { @class = "col-md-2 control-label" })
             <div class="col-md-4">
-                @Html.TextBox("adName", new { @class = "form-control" })
+                @Html.TextBox("adName")
             </div>
             <div class="col-md-4">
                 @Html.DropDownList("Category", String.Empty);
@@ -25,5 +25,14 @@
 </p>
 </div>
 @foreach (var item in Model) {
-    @Html.Partial("AdSummary", item);
+    <div class="well" id="user-ads">
+        <h3>
+            <a href="@Url.Action("AdInfo", "Ad", new { id = @item.Id })">
+                <strong>@item.Name</strong>
+            </a>
+            <span class="pull-right label label-primary">@item.Date.ToShortDateString() | @item.Price.ToString("# руб")</span>
+
+        </h3>
+        <span class="lead" id="profile-text">@item.Description</span>
+        </div>
 }

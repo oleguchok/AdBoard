@@ -51,5 +51,28 @@ namespace AdBoard.Domain.Concrete
             }
             return dbEntry;
         }
+
+        public void SaveImage(Image image)
+        {
+            if (image.Id == 0)
+                context.Images.Add(image);
+            else
+            {
+                Image dbEntry = context.Images.Find(image.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.AdId = image.AdId;
+                    dbEntry.Id = image.Id;
+                    dbEntry.ImageData = image.ImageData;
+                    dbEntry.ImageMimeType = image.ImageMimeType;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

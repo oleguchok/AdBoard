@@ -150,7 +150,7 @@ namespace AdBoard.WebUI.Controllers
                       select a;
             if (!String.IsNullOrEmpty(adName))
             {
-                ads = ads.Where(a => a.Name.Contains(adName));
+                ads = ads.Where(a => a.Name.ToLower() == adName.ToLower());
             }
             if (!String.IsNullOrEmpty(category))
             {
@@ -197,8 +197,15 @@ namespace AdBoard.WebUI.Controllers
                     image.ImageMimeType = file.ContentType;
                     image.ImageData = new byte[file.ContentLength];
                     file.InputStream.Read(image.ImageData, 0, file.ContentLength);
+                    
+                    /*var ad = repository.Ads.Where(a => a.Id == adId).FirstOrDefault();
+                    ad.Images = repository.Images.Where(m => m.AdId == adId);
+                    ad.Images.ToList().Add(image);
+                    repository.Ads.Where(a => a.Id == adId).FirstOrDefault().Images = ad.Images;
+                    repository.Save();*/
                     db.Images.Add(image);
                     db.SaveChanges();
+                    //repository.SaveImage(image);
                 }
                
             }

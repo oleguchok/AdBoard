@@ -49,12 +49,12 @@
            role="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
         <a href="@Url.Action("EditImages","Ad", new { adId = @Model.Id })" class="btn btn-sm btn-block btn-default"
            role="button"><span class="glyphicon glyphicon-picture"></span>Edit Photos</a>
-        using (Html.BeginForm("Delete", "Ad",new { adId = @Model.Id }, FormMethod.Post))
+        using (Html.BeginForm("Delete", "Ad", new { adId = @Model.Id }, FormMethod.Post))
         {
             <button type="submit" class="btn btn-sm btn-block btn-danger">
                 <span class="glyphicon glyphicon-remove"></span>Delete
             </button>
-        }     
+        }
     }
 
 </div>

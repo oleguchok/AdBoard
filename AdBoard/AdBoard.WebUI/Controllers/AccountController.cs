@@ -406,6 +406,11 @@ namespace AdBoard.WebUI.Controllers
             var user = await UserManager.FindAsync(loginInfo.Login);
             if (user != null)
             {
+                user.Country = String.Empty;
+                user.MobilePhone = String.Empty;
+                user.Name = String.Empty;
+                user.Surname = String.Empty;
+                user.StreetAddress = String.Empty;
                 await SignInAsync(user, isPersistent: false);
                 return RedirectToLocal(returnUrl);
             }
@@ -497,7 +502,7 @@ namespace AdBoard.WebUI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("List", "Ad");
         }
 
         //
