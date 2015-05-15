@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdBoard.Domain.Concrete
 {
-    public class EFAdRepository : IAdRepository
+    public class EFAdRepository : IAdRepository, IDisposable
     {
         EFDbContext context = new EFDbContext();
 
@@ -73,6 +73,25 @@ namespace AdBoard.Domain.Concrete
         public void Save()
         {
             context.SaveChanges();
+        }
+
+        protected void DisposeContext(bool disposing)
+        {
+            if(disposing)
+            {
+                if(context != null)
+                {
+                    context.Dispose();
+                    context = null;
+                }
+            }
+
+        }
+
+        public void Dispose()
+        {
+            DisposeContext(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

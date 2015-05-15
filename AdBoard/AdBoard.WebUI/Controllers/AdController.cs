@@ -15,12 +15,11 @@ namespace AdBoard.WebUI.Controllers
 {
     public class AdController : Controller
     {
-        private EFAdRepository repository;
+        IAdRepository repository;
         public int pageSize = 2;
-        EFDbContext db = new EFDbContext();
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         
-        public AdController(EFAdRepository repo)
+        public AdController(IAdRepository repo)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             repository = repo;
@@ -113,12 +112,6 @@ namespace AdBoard.WebUI.Controllers
             return View(model);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
         [HttpPost]
         public void StarAd(int adId)
         {
@@ -191,21 +184,12 @@ namespace AdBoard.WebUI.Controllers
             {
                 if (file != null)
                 {
-                    int count = repository.Images.Count();
-                    image.Id = ++count;
                     image.AdId = adId;
                     image.ImageMimeType = file.ContentType;
                     image.ImageData = new byte[file.ContentLength];
                     file.InputStream.Read(image.ImageData, 0, file.ContentLength);
-                    
-                    /*var ad = repository.Ads.Where(a => a.Id == adId).FirstOrDefault();
-                    ad.Images = repository.Images.Where(m => m.AdId == adId);
-                    ad.Images.ToList().Add(image);
-                    repository.Ads.Where(a => a.Id == adId).FirstOrDefault().Images = ad.Images;
-                    repository.Save();*/
-                    db.Images.Add(image);
-                    db.SaveChanges();
-                    //repository.SaveImage(image);
+
+                    repository.SaveImage(image);
                 }
                
             }
