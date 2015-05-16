@@ -33,15 +33,6 @@ namespace AdBoard.WebUI.Infrastructure
 
         public void AddBindings()
         {
-            /*Mock<IAdRepository> moq = new Mock<IAdRepository>();
-            moq.Setup(m => m.Ads).Returns(new List<Ad>
-                {
-                    new Ad { Name = "Motocycle", Date = new DateTime(2008,10,6), Description = "sdsadsadasd", Price = 1000, Category = "Auto-Moto", UserId = "35a86b68-803a-40fb-8522-027dedc154aa"},
-                    new Ad { Name = "Telephone", Date = new DateTime(2000,10,4), Description = "asdsiadsajdkasjdkasjdkajsdklasjdlkasd",
-                        Price = 100, Category = "Phone", UserId = "35a86b68-803a-40fb-8522-027dedc154aa" },
-                    new Ad { Name = "Toyota", Price = 1234, Category = "Auto-Moto"}
-                });
-            kernel.Bind<IAdRepository>().ToConstant(moq.Object);*/
             kernel.Bind<IAdRepository>().To<EFAdRepository>();
         }
     }

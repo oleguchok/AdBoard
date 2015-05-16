@@ -247,5 +247,26 @@ namespace AdBoard.UnitTests
             
             Assert.AreEqual(result.UserId, "id");
         }
+
+        [TestMethod]
+        public void Can_Delete_Ad()
+        {
+            Ad ad = new Ad { Id = 1, Name = "A2" };
+
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Id = 0, Name="A1"},
+                    new Ad { Id = 1, Name = "A2"},
+                    new Ad { Id = 2, Name = "A3"}
+                });
+
+            AdController controller = new AdController(mock.Object);
+
+            controller.Delete(1);
+            
+
+            mock.Verify(m => m.DeleteAd(ad.Id));
+        }
     }
 }
