@@ -263,10 +263,32 @@ namespace AdBoard.UnitTests
 
             AdController controller = new AdController(mock.Object);
 
-            controller.Delete(1);
-            
+            controller.Delete(1);            
 
             mock.Verify(m => m.DeleteAd(ad.Id));
+        }
+
+        [TestMethod]
+        public void Cannot_Edit_Nonexistent_Game()
+        {
+            // Организация - создание имитированного хранилища данных
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+            {
+                new Ad { Id = 1, Name = "Ad1"},
+                new Ad { Id = 2, Name = "Ad2"},
+                new Ad { Id = 3, Name = "Ad3"},
+                new Ad { Id = 4, Name = "Ad4"},
+                new Ad { Id = 5, Name = "Ad5"}
+            });
+
+            // Организация - создание контроллера
+            AdController controller = new AdController(mock.Object);
+
+            // Действие
+            Ad result = controller.Edit(6).ViewData.Model as Ad;
+
+            // Assert
         }
     }
 }
