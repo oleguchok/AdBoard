@@ -4,8 +4,8 @@
     ViewBag.Title = "SearchAds";
 }
 
-<h2>SearchAds</h2>
-<div>
+<h2>Search Ads</h2>
+<div class="col-md-12 col-sm-12">
 <p>
     @using (Html.BeginForm("SearchAds","Ad",FormMethod.Get))
     {
@@ -24,6 +24,7 @@
     }
 </p>
 </div>
+<div class="col-md-12">
 @foreach (var item in Model) {
     <div class="well" id="user-ads">
         <h3>
@@ -36,3 +37,4 @@
         <span class="lead" id="profile-text">@item.Description</span>
         </div>
 }
+</div>

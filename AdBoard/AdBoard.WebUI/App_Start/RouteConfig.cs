@@ -42,7 +42,11 @@ namespace AdBoard.WebUI
                 new { controller = "Account", action = "EditProfile" }
             );
 
-            
+            routes.MapRoute(
+                null,
+                "Search",
+                new { controller = "Ad", action = "SearchAds" }
+            );
 
             routes.MapRoute(
                 name: null,
