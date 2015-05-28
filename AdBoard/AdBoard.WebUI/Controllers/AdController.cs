@@ -105,10 +105,14 @@ namespace AdBoard.WebUI.Controllers
                 User = ApplicationDbContext.Users.FirstOrDefault(u => u.Id == ad.UserId)
             };
             ViewBag.IsInfo = true;
-            if (model.Ad.UserId == model.User.Id)
-                ViewBag.IsUserAd = true;
-            else
-                ViewBag.IsUserAd = false;
+            ViewBag.IsUserAd = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                if (model.Ad.UserId == User.Identity.GetUserId())
+                    ViewBag.IsUserAd = true;
+                else
+                    ViewBag.IsUserAd = false;
+            }
             return View(model);
         }
 

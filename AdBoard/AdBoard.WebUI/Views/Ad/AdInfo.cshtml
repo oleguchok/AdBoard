@@ -8,29 +8,8 @@
 
 <div class="page-header">
     <h2>
-        @Model.Ad.Name
-        @if (Model.User.FavoritesAds != null && Model.User.FavoritesAds.Contains(Model.Ad.Id))
-        {
-            using (Html.BeginForm("StarAd", "Ad", new { adId = Model.Ad.Id }, FormMethod.Post))
-            {
-                <button type="submit" class="btn btn-warning btn-lg" onclick="return DecideToMakeAStar('fill-star')" 
-                        style="float:right;">
-                    <span class="glyphicon glyphicon-star" id="empty-star" aria-hidden="true"></span> Starred
-                </button>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("StarAd", "Ad", new { adId = Model.Ad.Id }, FormMethod.Post))
-            {
-            <button type="submit" class="btn btn-warning btn-lg" onclick="return DecideToMakeAStar('empty-star')"
-                     style="float:right;">
-                <span class="glyphicon glyphicon-star-empty" id="empty-star" aria-hidden="true"></span> Starred
-            </button>
-            }
-        }
+        @Model.Ad.Name        
     </h2>
-
 </div>
 <div class="col-md-12">
     <div class="jumbotron" id="profile-bar">
