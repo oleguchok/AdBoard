@@ -12,5 +12,6 @@ namespace AdBoard.Domain.Concrete
     {
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Vote> Votes { get; set; }
     }
 }
