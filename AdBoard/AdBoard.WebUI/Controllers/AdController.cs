@@ -114,15 +114,7 @@ namespace AdBoard.WebUI.Controllers
                     ViewBag.IsUserAd = false;
             }
             return View(model);
-        }
-        
-        /*public ActionResult StarAd(int adId)
-        {
-            ApplicationUser user = ApplicationDbContext.Users.FirstOrDefault(u =>
-                u.Id == User.Identity.GetUserId());
-            user.FavoritesAds.ToList().Add(adId);
-            return
-        }*/
+        }        
 
         public ActionResult SearchAds(string adName, string category)
         {
