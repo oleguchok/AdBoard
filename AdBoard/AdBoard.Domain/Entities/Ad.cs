@@ -22,18 +22,20 @@ namespace AdBoard.Domain.Entities
         [Required(ErrorMessage="Please, enter description for ad")]
         public string Description { get; set; }
         
-        [DataType(DataType.DateTime)]
-        [Required(ErrorMessage="Please, enter date for ad")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString=("{0:dd/MM/yyyy}"), ApplyFormatInEditMode=true)]
+        [Required(ErrorMessage="Please, enter date for ad(use slash\"/\")")]
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage="Please, enter ad category")]
         [Display(Name="Cateogry")]
         public string Category { get; set; }
+
         [HiddenInput(DisplayValue=false)]
         public string UserId { get; set; }
 
-        [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please, enter ad price")]
+        [Required(ErrorMessage = "Please, enter ad price")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [HiddenInput(DisplayValue = true)]
