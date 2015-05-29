@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AdBoard.UnitTests
 {
@@ -74,6 +75,40 @@ namespace AdBoard.UnitTests
             Assert.AreEqual(ads.Count, 5);
             Assert.AreEqual(ads[0].Name, "Ad1");
             Assert.AreEqual(ads[4].Name, "Ad5");
+        }
+
+        [TestMethod]
+        public void Can_Save_Valid_Changes()
+        {
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+
+            AdminController controller = new AdminController(mock.Object);
+
+            Ad ad = new Ad { Name = "Test" };
+
+            ActionResult result = controller.Edit(ad);
+
+            mock.Verify(m => m.SaveAd(ad));
+
+            Assert.IsNotInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Can_Save_Invalid_Changes()
+        {
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+
+            AdminController controller = new AdminController(mock.Object);
+
+            Ad ad = new Ad { Name = "Test" };
+
+            controller.ModelState.AddModelError("error", "error");
+
+            ActionResult result = controller.Edit(ad);
+
+            mock.Verify(m => m.SaveAd(It.IsAny<Ad>()), Times.Never());
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }
 }

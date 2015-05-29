@@ -27,5 +27,21 @@ namespace AdBoard.WebUI.Controllers
             Ad ad = repository.Ads.FirstOrDefault(a => a.Id == adId);
             return View(ad);
         }
+
+        [HttpPost]
+        public ActionResult Edit(Ad ad)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveAd(ad);
+                TempData["message"] = string.Format("Changes in ad {0} was saved",
+                                                    ad.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(ad);
+            }
+        }
     }
 }
