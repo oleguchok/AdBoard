@@ -14,3 +14,4 @@
 /// <reference path="microsoftajax.js" />
 /// <reference path="microsoftmvcvalidation.js" />
 /// <reference path="microsoftmvcajax.js" />
+/// <reference path="jquery.signalr-2.2.0.min.js" />

@@ -289,6 +289,6 @@ namespace AdBoard.UnitTests
             Ad result = controller.Edit(6).ViewData.Model as Ad;
 
             // Assert
-        }
+        }        
     }
 }

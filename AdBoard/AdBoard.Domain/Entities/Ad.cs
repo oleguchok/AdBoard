@@ -35,5 +35,7 @@ namespace AdBoard.Domain.Entities
 
         [HiddenInput(DisplayValue=false)]
         public IEnumerable<Image> Images { get; set; }
+
+        public string Votes { get; set; }
     }
 }

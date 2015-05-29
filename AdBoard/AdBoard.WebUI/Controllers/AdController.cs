@@ -115,28 +115,14 @@ namespace AdBoard.WebUI.Controllers
             }
             return View(model);
         }
-
-        [HttpPost]
-        public void StarAd(int adId)
+        
+        /*public ActionResult StarAd(int adId)
         {
-            string userId = User.Identity.GetUserId();
-            ApplicationUser user = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == userId);
-            if (user.FavoritesAds != null && user.FavoritesAds.Contains(adId))
-            {
-                user.FavoritesAds = user.FavoritesAds.Where(a => a != adId).ToArray();
-            }
-            else
-            {
-                if (user.FavoritesAds != null)
-                {
-                    user.FavoritesAds.ToList().Add(adId);
-                    user.FavoritesAds.ToArray();
-                }
-                else
-                    user.FavoritesAds = new int[1] { adId };
-            }
-            ApplicationDbContext.SaveChanges();
-        }
+            ApplicationUser user = ApplicationDbContext.Users.FirstOrDefault(u =>
+                u.Id == User.Identity.GetUserId());
+            user.FavoritesAds.ToList().Add(adId);
+            return
+        }*/
 
         public ActionResult SearchAds(string adName, string category)
         {
