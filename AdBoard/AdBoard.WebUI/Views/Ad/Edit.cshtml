@@ -11,7 +11,7 @@
         <h3>Editing Ad @Model.Name</h3>
     </div>
 
-    @using (Html.BeginForm("Edit","Ad"))
+    @using (Html.BeginForm())
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)

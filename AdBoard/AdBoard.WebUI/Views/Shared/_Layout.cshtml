@@ -25,6 +25,12 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Search", "SearchAds", "Ad")</li>
                 </ul>
+                @if (User.IsInRole("admin"))
+                {
+                    <ul class=" nav navbar-nav">
+                        <li>@Html.ActionLink("Admin Panel","Index","Admin")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -63,5 +69,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+
 
 </html>

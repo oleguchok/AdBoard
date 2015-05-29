@@ -44,11 +44,6 @@ namespace AdBoard.WebUI.Controllers
             }
         }
 
-        public ViewResult Create()
-        {
-            return View("Edit", new Ad());
-        }
-
         [HttpPost]
         public ActionResult Delete(int adId)
         {
