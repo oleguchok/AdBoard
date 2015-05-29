@@ -110,5 +110,27 @@ namespace AdBoard.UnitTests
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Ads()
+        {
+            Ad ad = new Ad { Id = 2, Name = "Ad2" };
+
+            Mock<IAdRepository> mock = new Mock<IAdRepository>();
+            mock.Setup(m => m.Ads).Returns(new List<Ad>
+                {
+                    new Ad { Id = 1, Name = "Ad1"},
+                    new Ad { Id = 2, Name = "Ad2"},
+                    new Ad { Id = 3, Name = "Ad3"},
+                    new Ad { Id = 4, Name = "Ad4"},
+                    new Ad { Id = 5, Name = "Ad5"}
+                });
+
+            AdminController controller = new AdminController(mock.Object);
+
+            controller.Delete(ad.Id);
+
+            mock.Verify(m => m.DeleteAd(ad.Id));
+        }
     }
 }
