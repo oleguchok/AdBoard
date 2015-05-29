@@ -1,4 +1,5 @@
 ﻿using AdBoard.Domain.Abstract;
+using AdBoard.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,12 @@ namespace AdBoard.WebUI.Controllers
         public ViewResult Index()
         {
             return View(repository.Ads);
+        }
+
+        public ViewResult Edit(int adId)
+        {
+            Ad ad = repository.Ads.FirstOrDefault(a => a.Id == adId);
+            return View(ad);
         }
     }
 }
