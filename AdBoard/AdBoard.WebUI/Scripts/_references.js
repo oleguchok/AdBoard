@@ -9,7 +9,6 @@
 /// <reference path="npm.js" />
 /// <reference path="jasny-bootstrap.min.js" />
 /// <reference path="imageload.js" />
-/// <reference path="sitescripts.js" />
 /// <reference path="microsoftajax.js" />
 /// <reference path="microsoftmvcvalidation.js" />
 /// <reference path="microsoftmvcajax.js" />

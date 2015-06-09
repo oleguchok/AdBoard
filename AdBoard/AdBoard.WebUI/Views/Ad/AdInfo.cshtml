@@ -8,20 +8,7 @@
 
 <div class="page-header">
     <h2>
-        @Model.Ad.Name
-        @if (Request.IsAuthenticated)
-        {
-            @Ajax.ActionLink("Star Ad", "StarAd", "Ad", new AjaxOptions { UpdateTargetId = "star" })
-            if (Model.User.FavoritesAds != null && Model.User.FavoritesAds.Contains(Model.Ad.Id))
-            {
-                <span class="glyphicon glyphicon-star" style="float:right;" id="star"></span>
-            }
-            else
-            {
-                <span class="glyphicon glyphicon-star-empty" style="float:right;" id="star"></span>
-            }
-        }
-
+        @Model.Ad.Name        
     </h2>
 
 

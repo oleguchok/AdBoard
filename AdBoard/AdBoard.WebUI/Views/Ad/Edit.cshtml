@@ -11,7 +11,7 @@
         <h3>Editing Ad @Model.Name</h3>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit","Ad"))
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
@@ -47,7 +47,7 @@
             }
         </div>
         <div class="panel-footer">
-            <input type="submit" value="Сохранить" class="btn btn-primary" />
+            <input type="submit" value="Save" class="btn btn-primary" />
             @Html.ActionLink("Cancel changes and return to list", "AdInfo", "Ad", new { id = @Model.Id }, new
             {
                 @class = "btn btn-default"

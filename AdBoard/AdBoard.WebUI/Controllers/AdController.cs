@@ -125,7 +125,7 @@ namespace AdBoard.WebUI.Controllers
                       select a;
             if (!String.IsNullOrEmpty(adName))
             {
-                ads = ads.Where(a => a.Name.ToLower() == adName.ToLower());
+                ads = ads.Where(a => a.Name.ToLower().Contains(adName.ToLower()));
             }
             if (!String.IsNullOrEmpty(category))
             {
